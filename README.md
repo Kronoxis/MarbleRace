@@ -1,6 +1,8 @@
 # MarbleRace
 Marble Race - Giveaway System
 
+# START OF GIT _(05 Febr 2017)_
+
 # v1.1.1 _(04 Febr 2017)_
 ## -=NEW=-
 - data Folder no longer saves in Application_Data folder. Instead, files will be saved in AppData/MarbleRace/data to keep resources through different versions
