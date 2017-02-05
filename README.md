@@ -1,6 +1,11 @@
 # MarbleRace
 Marble Race - Giveaway System
 
+# v1.1.2 _(Soon)_
+## -=BUGS TO FIX=-
+- Sleeping Actors glitch through obstacles
+- Z Rotation Lock broken (Sprites still rotate away from the camera)
+
 # START OF GIT _(05 Febr 2017)_
 
 # v1.1.1 _(04 Febr 2017)_
