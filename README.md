@@ -4,6 +4,7 @@ Marble Race - Giveaway System
 # v1.1.1
 ## -=NEW=-
 - data Folder no longer saves in Application_Data folder. Instead, files will be saved in AppData/MarbleRace/data to keep resources through different versions
+
 ## -=EXTRA=-
 - Folder "DefaultSprites". Contains 3 sprites for PixelsRealm, Thycon and Mstiekema. Copy to your Sprites folder to make them work. (Default: %AppData%/MarbleRace/data/sprites/)
 
@@ -17,6 +18,7 @@ Marble Race - Giveaway System
     * Preferred Image Ratio: 1:1. 
     * Minimum Resolution for Optimal Quality: 128*128px. 
     * Capitals not important
+
 ## -=FIXES=-
 - Minor Bugs in Controls and Config save/load scripts
 
@@ -24,6 +26,7 @@ Marble Race - Giveaway System
 ## -=NEW=-
 - Leaderboard now has colored text. Colors correspond with the color of the user's marble.
 - Leaderboard automatically saves when the winner has touched the Finish.
+
 ## -=FIXES=-
 - Bottom Part of Race 1 was fixed (Marbles no longer get stuck)
 
@@ -41,11 +44,12 @@ Marble Race - Giveaway System
 - Added Back button in Race to go back to Menu (will reset race)
 - Autosave of entered users
 - Ability to Save leaderboard (Save button in race)
+
 ## -=FIXES=-
 - Camera can't go through Race anymore
 - Start can no longer be triggered before giveaway is closed
 
- -=Known Bugs that still need fixing=-
+## -=KNOWN BUGS=-
 - "Add Marble Delay" slider text values do not show correctly when loading the Config screen, 
     even though the value of the slider itself is correct.
 - Bottom Lane of Bottom part has a straight bit where marbles get stuck.
@@ -54,6 +58,7 @@ Marble Race - Giveaway System
 ## -=NEW=-
 - Application now runs in background
 - GUI element lets user know if giveaway hasn't been closed
+
 ## -=FIXES=-
 - Elements that are partly inside background bumped back a pixel, so it is behind background color
 - Added wheel from v1.0.1 wasn't placed correctly. Shifted it to better location
@@ -66,7 +71,7 @@ Marble Race - Giveaway System
 ## -=FIXES=-
 - Added wheel at the beginning, bottom lane, to prevent queue
 
-//TODO
+# _TO DO_
 - Add More Races
 - Add Course editing
 - Add System for Knockout-Race
