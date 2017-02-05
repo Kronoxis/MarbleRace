@@ -1,0 +1,4 @@
+Start: Space,Return,null,null
+Horizontal: D,Right,A,Left
+Vertical: W,Up,S,Down
+Zoom: Num+,LShift,Num-,LCtrl
