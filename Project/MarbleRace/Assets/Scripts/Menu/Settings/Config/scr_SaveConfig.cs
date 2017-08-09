@@ -48,6 +48,12 @@ public class scr_SaveConfig : MonoBehaviour {
 
         value = GameObject.Find("InputAddMarbleDelay").GetComponent<Slider>().value.ToString();
         gManager.gAddMarbleDelay = float.Parse(value);
+
+        bool enabled = GameObject.Find("InputManualStart").GetComponent<Toggle>().isOn;
+        gManager.gIsManualStart = enabled;
+
+        enabled = GameObject.Find("InputStartDelay").GetComponent<Toggle>().isOn;
+        gManager.gIsStartDelay = enabled;
     }
 
     void SaveConfigToFile()
@@ -69,6 +75,10 @@ public class scr_SaveConfig : MonoBehaviour {
         sw.WriteLine("ScoreboardUpdateDelay: " + gManager.gScoreboardUpdateDelay.ToString());
 
         sw.WriteLine("AddMarbleDelay: " + gManager.gAddMarbleDelay.ToString());
+
+        sw.WriteLine("ManualStart: " + gManager.gIsManualStart.ToString());
+
+        sw.WriteLine("StartDelay: " + gManager.gIsStartDelay.ToString());
         
         sw.Close();
     }

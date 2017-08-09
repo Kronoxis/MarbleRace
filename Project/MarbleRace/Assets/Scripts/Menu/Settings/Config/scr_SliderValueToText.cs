@@ -12,9 +12,9 @@ public class scr_SliderValueToText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	    m_Text = gameObject.transform.FindChild("Handle Slide Area").FindChild("Handle").FindChild("Text").GetComponent<Text>();
+	    m_Text = gameObject.transform.Find("Handle Slide Area").Find("Handle").Find("Text").GetComponent<Text>();
         m_Slider = gameObject.GetComponent<Slider>();
-        m_InputFieldText = gameObject.transform.parent.FindChild("SliderValue").FindChild("Placeholder").GetComponent<Text>();
+        m_InputFieldText = gameObject.transform.parent.Find("SliderValue").Find("Placeholder").GetComponent<Text>();
     }
 	
 	// Update is called once per frame

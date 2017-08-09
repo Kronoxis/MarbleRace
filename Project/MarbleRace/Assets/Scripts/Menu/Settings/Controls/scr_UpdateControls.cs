@@ -54,6 +54,6 @@ public class scr_UpdateControls : MonoBehaviour {
 
     void SetNewKey(KeyCode key)
     {
-        transform.FindChild("Text").GetComponent<Text>().text = gManager.KeyCodeToString(key);
+        transform.Find("Text").GetComponent<Text>().text = gManager.KeyCodeToString(key);
     }
 }

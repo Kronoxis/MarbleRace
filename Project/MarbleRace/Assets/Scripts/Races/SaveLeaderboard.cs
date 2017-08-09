@@ -15,7 +15,7 @@ public class SaveLeaderboard : MonoBehaviour {
     public void Save()
     {
         StreamWriter sw = new StreamWriter(gManager.gSavePath + "Leaderboard_" + GetDateTime() + ".txt");
-        string data = GameObject.Find("Canvas").transform.FindChild("Panel").GetComponent<Leaderboard>().GetRanking().text;
+        string data = GameObject.Find("Canvas").transform.Find("Panel").GetComponent<Leaderboard>().GetRanking().text;
         sw.Write(data);
         sw.Close();
     }

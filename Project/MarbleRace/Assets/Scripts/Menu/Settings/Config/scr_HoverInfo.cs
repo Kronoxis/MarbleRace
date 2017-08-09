@@ -17,6 +17,8 @@ public class scr_HoverInfo : MonoBehaviour {
         "NameDownloadUsersDelay",
         "NameScoreboardUpdateDelay",
         "NameAddMarbleDelay",
+        "NameManualStart",
+        "NameStartDelay"
     };
     string[] m_InfoTexts = {
         "The path where your inputs will be saved. Inputs are controls and configs. If a relative address is given, it will be saved in AppData/MarbleRace/.",
@@ -27,6 +29,8 @@ public class scr_HoverInfo : MonoBehaviour {
         "The delay between each check for new users. Increasing this value may reduce lag. Decreasing this value drastically may result in Users being added twice.",
         "The delay between each Leaderboard update. Increasing this value may reduce lag, but will also be less convenient to track who's in first place.",
         "The delay between each added marble. Increasing this value may reduce lag. Decreasing this value drastically may result in an \'explosion\' of marbles.",
+        "Whether !gstop triggers start or not. If Manual Start is enabled, you'll have to manually press the start key.",
+        "Whether there should be a start delay or not. If Start Delay is enabled, there will be a 3 second countdown before actually dropping the marbles."
     };
     List<int> m_Heights = new List<int>();
 
@@ -69,7 +73,7 @@ public class scr_HoverInfo : MonoBehaviour {
                     if (btn.name == m_ButtonNames[i])
                     {
                         // Set text
-                        transform.FindChild("Text").GetComponent<Text>().text = m_InfoTexts[i];
+                        transform.Find("Text").GetComponent<Text>().text = m_InfoTexts[i];
 
                         // Set Height of Panel
                         GetComponent<RectTransform>().sizeDelta = new Vector2(
@@ -77,8 +81,8 @@ public class scr_HoverInfo : MonoBehaviour {
                             m_Heights[i] + 5);
 
                         // Set Height of Text Box
-                        transform.FindChild("Text").GetComponent<RectTransform>().sizeDelta = new Vector2(
-                            transform.FindChild("Text").GetComponent<RectTransform>().rect.width,
+                        transform.Find("Text").GetComponent<RectTransform>().sizeDelta = new Vector2(
+                            transform.Find("Text").GetComponent<RectTransform>().rect.width,
                             m_Heights[i]);
 
                         // Set Position of HoverInfo

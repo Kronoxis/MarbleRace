@@ -17,6 +17,41 @@ public class GlobalManager : Singleton<GlobalManager> {
         HHMM_MMDDYYYY
     }
 
+    public enum Controls
+    {
+        Start1,
+        Start2,
+        Right1,
+        Right2,
+        Left1,
+        Left2,
+        Up1,
+        Up2,
+        Down1,
+        Down2,
+        ZoomIn1,
+        ZoomIn2,
+        ZoomOut1,
+        ZoomOut2,
+        END
+    }
+
+    public enum Configs
+    {
+        InputPath,
+        GiveawayURL,
+        SpritePath,
+        SavePath,
+        SaveFormat,
+        DownloadUserDelay,
+        ScoreboardUpdateDelay,
+        AddMarbleDelay,
+        ManualStart,
+        StartDelay,
+        END
+    }
+
+
     // Controls
     public KeyCode gKeyStart1;
     public KeyCode gKeyStart2;
@@ -42,26 +77,25 @@ public class GlobalManager : Singleton<GlobalManager> {
     public float gDownloadUsersDelay;
     public float gScoreboardUpdateDelay;
     public float gAddMarbleDelay;
+    public bool gIsManualStart;
+    public bool gIsStartDelay;
 
     // Other global variables
     public bool gIsGiveawayClosed;
     public Vector2 gReferenceResolution;
 
+    // Private variables
+    private static int CONTROLS = 14;
+    private static int CONFIGS = 10;
+
     void Awake()
     {
         // Default Init
         DefaultInit();
-        // Create defaults when there are none to read from
-        if (!Directory.Exists(gInputPath))
-        {       
-            // Create data directories and files
-            CreateFiles();
-        }
-        else
-        {
-            // Init from file
-            VariablesInit();
-        }
+        // Create data directories and files if they don't exist yet
+        CreateFiles();
+        // Init from file
+        VariablesInit();
     }
 
     void DefaultInit()
@@ -89,6 +123,8 @@ public class GlobalManager : Singleton<GlobalManager> {
         gDownloadUsersDelay = 1.0f;
         gScoreboardUpdateDelay = 0.05f;
         gAddMarbleDelay = 0.1f;
+        gIsManualStart = true;
+        gIsStartDelay = true;
 
         gIsGiveawayClosed = false;
         gReferenceResolution = new Vector2(800, 600);
@@ -97,32 +133,57 @@ public class GlobalManager : Singleton<GlobalManager> {
     public void CreateFiles()
     {
         // Directories
-        Directory.CreateDirectory(gInputPath);
-        Directory.CreateDirectory(gSpritePath);
-        Directory.CreateDirectory(gSavePath);
+        // Create defaults when there are none to read from
+        if (!Directory.Exists(gInputPath))
+            Directory.CreateDirectory(gInputPath);
+        if (!Directory.Exists(gSpritePath))
+            Directory.CreateDirectory(gSpritePath);
+        if (!Directory.Exists(gSavePath))
+            Directory.CreateDirectory(gSavePath);
 
         // Files
-        string controls, config = null;
-        GenerateDefaultText(out controls, out config);
+        string controls = null;
+        string config = null;
+        if (!Directory.Exists(gInputPath + "Controls.txt") || !Directory.Exists(gInputPath + "Config.txt"))
+            GenerateDefaultText(out controls, out config);
 
-        File.WriteAllText(gInputPath + "Controls.txt", controls);
-        File.WriteAllText(gInputPath + "Config.txt", config);
+        if (!Directory.Exists(gInputPath + "Controls.txt"))
+            File.WriteAllText(gInputPath + "Controls.txt", controls);
+
+        if (!Directory.Exists(gInputPath + "Config.txt"))
+            File.WriteAllText(gInputPath + "Config.txt", config);
     }
 
     void GenerateDefaultText(out string controls, out string config)
     {
         controls = null;
-        controls += "Start: " + KeyCodeToString(gKeyStart1) + "," + KeyCodeToString(gKeyStart2) + "," +
-            "null" + "," + "null";
+        controls += "Start1: " + KeyCodeToString(gKeyStart1);
         controls += "\n";
-        controls += "Horizontal: " + KeyCodeToString(gKeyRight1) + "," + KeyCodeToString(gKeyRight2) + "," + 
-            KeyCodeToString(gKeyLeft1) + "," + KeyCodeToString(gKeyLeft2);
+        controls += "Start2: " + KeyCodeToString(gKeyStart2);
         controls += "\n";
-        controls += "Vertical: " + KeyCodeToString(gKeyUp1) + "," + KeyCodeToString(gKeyUp2) + "," +
-            KeyCodeToString(gKeyDown1) + "," + KeyCodeToString(gKeyDown2);
+        controls += "Right1: " + KeyCodeToString(gKeyRight1);
         controls += "\n";
-        controls += "Zoom: " + KeyCodeToString(gKeyZoomIn1) + "," + KeyCodeToString(gKeyZoomIn2) + "," +
-            KeyCodeToString(gKeyZoomOut1) + "," + KeyCodeToString(gKeyZoomOut2);
+        controls += "Right2: " + KeyCodeToString(gKeyRight2);
+        controls += "\n";
+        controls += "Left1: " + KeyCodeToString(gKeyLeft1);
+        controls += "\n";
+        controls += "Left2: " + KeyCodeToString(gKeyLeft2);
+        controls += "\n";
+        controls += "Up1: " + KeyCodeToString(gKeyUp1);
+        controls += "\n";
+        controls += "Up2: " + KeyCodeToString(gKeyUp2);
+        controls += "\n";
+        controls += "Down1: " + KeyCodeToString(gKeyDown1);
+        controls += "\n";
+        controls += "Down2: " + KeyCodeToString(gKeyDown2);
+        controls += "\n";
+        controls += "ZoomIn1: " + KeyCodeToString(gKeyZoomIn1);
+        controls += "\n";
+        controls += "ZoomIn2: " + KeyCodeToString(gKeyZoomIn2);
+        controls += "\n";
+        controls += "ZoomOut1: " + KeyCodeToString(gKeyZoomOut1);
+        controls += "\n";
+        controls += "ZoomOut2: " + KeyCodeToString(gKeyZoomOut2);
 
         config = null;
         config += "InputPath: " + gInputPath;
@@ -140,68 +201,68 @@ public class GlobalManager : Singleton<GlobalManager> {
         config += "ScoreboardUpdateDelay: " + gScoreboardUpdateDelay.ToString();
         config += "\n";
         config += "AddMarbleDelay: " + gAddMarbleDelay.ToString();
+        config += "\n";
+        config += "ManualStart: " + gIsManualStart.ToString();
+        config += "\n";
+        config += "StartDelay: " + gIsStartDelay.ToString();
     }
 
     void VariablesInit()
     {
         // Get controls from controls file
         StreamReader sr = new StreamReader(gInputPath + "Controls.txt");
-        string all = null;
+        string allNames = null;
+        string allValues = null;
         string line = null;
+        string lineName = null;
+        string lineValue = null;
 
         // Read line by line, cut AxisName
         while (!sr.EndOfStream)
         {
             line = sr.ReadLine();
-            line = line.Substring(line.IndexOf(": ") + 2);
-            line += ",";
-            all += line;
+            lineName = line.Substring(0, line.IndexOf(": "));
+            lineValue = line.Substring(line.IndexOf(": ") + 2);
+            lineName += ",";
+            lineValue += ",";
+            allNames += lineName;
+            allValues += lineValue;
         }
         sr.Close();
         // Add every control to its global variable
         char[] splits = { ',' };
-        string[] keys = all.Split(splits, System.StringSplitOptions.RemoveEmptyEntries);
+        string[] keyNames = allNames.Split(splits, System.StringSplitOptions.RemoveEmptyEntries);
+        string[] keyValues = allValues.Split(splits, System.StringSplitOptions.RemoveEmptyEntries);
 
-        gKeyStart1   = StringToKeyCode(keys[0]);
-        gKeyStart2   = StringToKeyCode(keys[1]);
-        gKeyRight1   = StringToKeyCode(keys[4]);
-        gKeyRight2   = StringToKeyCode(keys[5]);
-        gKeyLeft1    = StringToKeyCode(keys[6]);
-        gKeyLeft2    = StringToKeyCode(keys[7]);
-        gKeyUp1      = StringToKeyCode(keys[8]);
-        gKeyUp2      = StringToKeyCode(keys[9]);
-        gKeyDown1    = StringToKeyCode(keys[10]);
-        gKeyDown2    = StringToKeyCode(keys[11]);
-        gKeyZoomIn1  = StringToKeyCode(keys[12]);
-        gKeyZoomIn2  = StringToKeyCode(keys[13]);
-        gKeyZoomOut1 = StringToKeyCode(keys[14]);
-        gKeyZoomOut2 = StringToKeyCode(keys[15]);
+        for (int i = 0; i < keyNames.Length; ++i)
+            StoreControl(keyNames[i], keyValues[i]);
 
         // Get config from config file
         sr = new StreamReader(gInputPath + "Config.txt");
-        all = null;
-        line = null;
+        allNames = null;
+        allValues = null;
+        lineName = null;
+        lineValue = null;
 
         // Read line by line, cut VariableName
         while (!sr.EndOfStream)
         {
             line = sr.ReadLine();
-            line = line.Substring(line.IndexOf(": ") + 2);
-            line += ",";
-            all += line;
+            lineName = line.Substring(0, line.IndexOf(":"));
+            lineValue = line.Substring(line.IndexOf(": ") + 2);
+            lineName += ",";
+            lineValue += ",";
+            allNames += lineName;
+            allValues += lineValue;
         }
         sr.Close();
         // Add every config to its global variable
-        string[] configs = all.Split(splits, System.StringSplitOptions.RemoveEmptyEntries);
+        string[] configNames = allNames.Split(splits, System.StringSplitOptions.RemoveEmptyEntries);
+        string[] configValues = allValues.Split(splits, System.StringSplitOptions.RemoveEmptyEntries);
 
-        gInputPath              = ModifyPath(configs[0]);
-        gGiveawayURL            = configs[1];
-        gSpritePath             = ModifyPath(configs[2]);
-        gSavePath               = ModifyPath(configs[3]);
-        gFormat                 = StringToFormatEnum(configs[4]);
-        gDownloadUsersDelay     = float.Parse(configs[5]);
-        gScoreboardUpdateDelay  = float.Parse(configs[6]);
-        gAddMarbleDelay         = float.Parse(configs[7]);
+        for (int i = 0; i < configNames.Length; ++i)
+            StoreConfig(configNames[i], configValues[i]);
+
     }
 
     public KeyCode StringToKeyCode(string keyName)
@@ -750,5 +811,202 @@ public class GlobalManager : Singleton<GlobalManager> {
         }
 
         return format;
+    }
+
+    void VerifyControlsFile(string filePath, string variable)
+    {
+        StreamReader sr = new StreamReader(filePath);
+
+        List<KeyValuePair<string, string>> fromFile = new List<KeyValuePair<string, string>>();
+        while (!sr.EndOfStream)
+        {
+            string readLine = sr.ReadLine();
+            int split = readLine.IndexOf(":");
+            string key = readLine.Substring(0, split);
+            string value = readLine.Substring(split + 2);
+            fromFile.Add(new KeyValuePair<string, string>(key, value));
+        }
+
+        int count = -1;
+        if (variable.ToLower().Contains("Control"))
+        {
+            variable = "Controls";
+            count = CONTROLS;
+        }
+        else if (variable.ToLower().Contains("config"))
+        {
+            variable = "Configs";
+            count = CONFIGS;
+        }
+        else
+        {
+            Debug.Log("Argument variable in GlobalManager>>VerifyControlsFile() was invalid! Controls or Configs expected, " 
+                + variable + " specified");
+            return;
+        }
+
+        if (fromFile.Count != count)
+        {
+            Debug.Log("Missing Controls, Attempting to recover previous controls and fill in missing ones");
+            fromFile = GetExisting(fromFile, variable);
+            FillEmptyFromFile(fromFile);
+        }
+
+        sr.Close();
+    }
+
+    List<string> GetControlsList()
+    {
+        List<string> controls = new List<string>();
+        for (Controls control = 0; control != Controls.END; ++control)
+            controls.Add(control.ToString());
+        return controls;
+    }
+
+    List<string> GetConfigsList()
+    {
+        List<string> configs = new List<string>();
+        for (Configs config = 0; config != Configs.END; ++config)
+            configs.Add(config.ToString());
+        return configs;
+    }
+
+    List<KeyValuePair<string, string>> GetExisting(List<KeyValuePair<string, string>> fromFile, string variable)
+    {
+
+        List<string> list;
+        if (variable == "Controls")
+            list = GetControlsList();
+        else
+            list = GetConfigsList();
+
+        List<KeyValuePair<string, string>> toRet = new List<KeyValuePair<string, string>>();
+
+        foreach (string elem in list)
+        {
+            KeyValuePair<string, string> foundPair = new KeyValuePair<string, string>(elem, null);
+            // Check for each control in controls if there is a matching control from the file
+            foreach (KeyValuePair<string, string> pair in fromFile)
+            {
+                // Control is found in file
+                if (pair.Key == elem)
+                {
+                    foundPair = pair;
+                    // Stop current loop
+                    break;
+                }
+            }
+            // Add current value if found, else add null
+            toRet.Add(foundPair);
+        }
+
+        return toRet;
+    }
+
+    void FillEmptyFromFile(List<KeyValuePair<string, string>> existing)
+    {
+        StreamWriter sw = new StreamWriter(gInputPath + "Controls.txt");
+
+        foreach (KeyValuePair<string, string> pair in existing)
+        {
+            if (pair.Value == null)
+            {
+
+            }
+        }
+    }
+
+    void StoreControl(string variable, string value)
+    {
+        switch (variable)
+        {
+            case "Start1":
+                gKeyStart1 = StringToKeyCode(value);
+                break;
+            case "Start2":
+                gKeyStart2 = StringToKeyCode(value);
+                break;
+            case "Right1":
+                gKeyRight1 = StringToKeyCode(value);
+                break;
+            case "Right2":
+                gKeyRight2 = StringToKeyCode(value);
+                break;
+            case "Left1":
+                gKeyLeft1 = StringToKeyCode(value);
+                break;
+            case "Left2":
+                gKeyLeft2 = StringToKeyCode(value);
+                break;
+            case "Up1":
+                gKeyUp1 = StringToKeyCode(value);
+                break;
+            case "Up2":
+                gKeyUp2 = StringToKeyCode(value);
+                break;
+            case "Down1":
+                gKeyDown1 = StringToKeyCode(value);
+                break;
+            case "Down2":
+                gKeyDown2 = StringToKeyCode(value);
+                break;
+            case "ZoomIn1":
+                gKeyZoomIn1 = StringToKeyCode(value);
+                break;
+            case "ZoomIn2":
+                gKeyZoomIn2 = StringToKeyCode(value);
+                break;
+            case "ZoomOut1":
+                gKeyZoomOut1 = StringToKeyCode(value);
+                break;
+            case "ZoomOut2":
+                gKeyZoomOut2 = StringToKeyCode(value);
+                break;
+            default:
+                Debug.Log("GlobalManager >> StoreControl >> Unknown Value in switch");
+                Debug.Log("Controls File Outdated, Resetting to Defaults");
+                DefaultInit();
+                break;
+        }
+    }
+
+    void StoreConfig(string variable, string value)
+    {
+        switch (variable)
+        {
+            case "InputPath":
+                gInputPath = ModifyPath(value);
+                break;
+            case "GiveawayURL":
+                gGiveawayURL = value;
+                break;
+            case "SpritePath":
+                gSpritePath = ModifyPath(value);
+                break;
+            case "SavePath":
+                gSavePath = ModifyPath(value);
+                break;
+            case "SaveFormat":
+                gFormat = StringToFormatEnum(value);
+                break;
+            case "DownloadUsersDelay":
+                gDownloadUsersDelay = float.Parse(value);
+                break;
+            case "ScoreboardUpdateDelay":
+                gScoreboardUpdateDelay = float.Parse(value);
+                break;
+            case "AddMarbleDelay":
+                gAddMarbleDelay = float.Parse(value);
+                break;
+            case "ManualStart":
+                gIsManualStart = bool.Parse(value);
+                break;
+            case "StartDelay":
+                gIsStartDelay = bool.Parse(value);
+                break;
+            default:
+                Debug.Log("GlobalManager >> StoreConfig >> Unkown Value in switch");
+                break;
+        }
     }
 }
