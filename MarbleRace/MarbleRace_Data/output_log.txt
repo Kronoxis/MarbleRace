@@ -1,98 +1,60 @@
-Initialize engine version: 5.4.1f1 (649f48bbbf0f)
+Initialize engine version: 2017.1.0f3 (472613c02cf7)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
     Renderer: NVIDIA GeForce GTX 960M     (ID=0x139b)
     Vendor:   NVIDIA
     VRAM:     3072 MB
+    Driver:   10.18.13.6175
 Begin MonoManager ReloadAssembly
-Platform assembly: E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
-Loading E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.186 seconds
-Platform assembly: E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 48Hz; virtual: 1920x1080 at 0,0
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.Timeline.dll (this message is harmless)
+Loading E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.Timeline.dll into Unity Child Domain
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\System.dll (this message is harmless)
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.019 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 2.197211 ms
+UnloadTime: 1.018866 ms
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.017036 ms
+UnloadTime: 4.696813 ms
 
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 287.
-Total: 0.242380 ms (FindLiveObjects: 0.017369 ms CreateObjectMapping: 0.011053 ms MarkObjects: 0.210010 ms  DeleteObjects: 0.003158 ms)
-
-Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.631214 ms
-
-Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 598.
-Total: 0.373439 ms (FindLiveObjects: 0.041054 ms CreateObjectMapping: 0.018948 ms MarkObjects: 0.298435 ms  DeleteObjects: 0.014211 ms)
-
-Platform assembly: E:\Projects\Unity\MarbleRace\Builds\Build 1.1.1\MarbleRace_v1.1.1_Data\Managed\Mono.Security.dll (this message is harmless)
-Updating userlist
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Giveaway has been closed
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Added Texture instead of Color for user PixelsRealm
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Finished updating userlist
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.981363 ms
-
-Unloading 69 unused Assets to reduce memory usage. Loaded Objects now: 288.
-Total: 0.921755 ms (FindLiveObjects: 0.029211 ms CreateObjectMapping: 0.037107 ms MarkObjects: 0.503708 ms  DeleteObjects: 0.350937 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 397.
+Total: 0.298041 ms (FindLiveObjects: 0.026053 ms CreateObjectMapping: 0.014211 ms MarkObjects: 0.253828 ms  DeleteObjects: 0.003552 ms)
 
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.426336 ms
+UnloadTime: 0.406599 ms
 
-Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 598.
-Total: 0.450021 ms (FindLiveObjects: 0.043817 ms CreateObjectMapping: 0.018158 ms MarkObjects: 0.373439 ms  DeleteObjects: 0.014211 ms)
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 709.
+Total: 0.269223 ms (FindLiveObjects: 0.042238 ms CreateObjectMapping: 0.020527 ms MarkObjects: 0.183956 ms  DeleteObjects: 0.022106 ms)
+
+Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\Mono.Security.dll (this message is harmless)
+Checking for userlist update
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Updating userlist
  
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Giveaway has been closed
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Added Texture instead of Color for user PixelsRealm
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Finished updating userlist
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.958467 ms
+UnloadTime: 1.134135 ms
 
-Unloading 69 unused Assets to reduce memory usage. Loaded Objects now: 288.
-Total: 0.871226 ms (FindLiveObjects: 0.031975 ms CreateObjectMapping: 0.028027 ms MarkObjects: 0.446074 ms  DeleteObjects: 0.363964 ms)
+Unloading 124 unused Assets to reduce memory usage. Loaded Objects now: 398.
+Total: 0.627268 ms (FindLiveObjects: 0.032764 ms CreateObjectMapping: 0.015790 ms MarkObjects: 0.291330 ms  DeleteObjects: 0.286987 ms)
 
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.430678 ms
-
-Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 241.
-Total: 0.387650 ms (FindLiveObjects: 0.016974 ms CreateObjectMapping: 0.010263 ms MarkObjects: 0.345411 ms  DeleteObjects: 0.014211 ms)
-
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 5e8 -> priority: 1 
-  Thread -> id: 1954 -> priority: 1 
+Setting up 4 worker threads for Enlighten.
+  Thread -> id: 35b0 -> priority: 1 
+  Thread -> id: 299c -> priority: 1 
+  Thread -> id: 1dcc -> priority: 1 
+  Thread -> id: 3e0 -> priority: 1 
