@@ -25,18 +25,18 @@ Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleR
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.018866 ms
+UnloadTime: 1.112423 ms
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.696813 ms
+UnloadTime: 6.814287 ms
 
 Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 397.
-Total: 0.298041 ms (FindLiveObjects: 0.026053 ms CreateObjectMapping: 0.014211 ms MarkObjects: 0.253828 ms  DeleteObjects: 0.003552 ms)
+Total: 0.292909 ms (FindLiveObjects: 0.026448 ms CreateObjectMapping: 0.014211 ms MarkObjects: 0.247512 ms  DeleteObjects: 0.003947 ms)
 
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.406599 ms
+UnloadTime: 0.406204 ms
 
 Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 709.
-Total: 0.269223 ms (FindLiveObjects: 0.042238 ms CreateObjectMapping: 0.020527 ms MarkObjects: 0.183956 ms  DeleteObjects: 0.022106 ms)
+Total: 0.372255 ms (FindLiveObjects: 0.060002 ms CreateObjectMapping: 0.031580 ms MarkObjects: 0.240406 ms  DeleteObjects: 0.039475 ms)
 
 Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\Mono.Security.dll (this message is harmless)
 Checking for userlist update
@@ -47,14 +47,8 @@ Updating userlist
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.134135 ms
-
-Unloading 124 unused Assets to reduce memory usage. Loaded Objects now: 398.
-Total: 0.627268 ms (FindLiveObjects: 0.032764 ms CreateObjectMapping: 0.015790 ms MarkObjects: 0.291330 ms  DeleteObjects: 0.286987 ms)
-
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 35b0 -> priority: 1 
-  Thread -> id: 299c -> priority: 1 
-  Thread -> id: 1dcc -> priority: 1 
-  Thread -> id: 3e0 -> priority: 1 
+  Thread -> id: 1f9c -> priority: 1 
+  Thread -> id: 2104 -> priority: 1 
+  Thread -> id: 2194 -> priority: 1 
+  Thread -> id: 23bc -> priority: 1 
