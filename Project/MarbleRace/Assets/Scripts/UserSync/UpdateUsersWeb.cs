@@ -3,16 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(DownloadTextWeb))]
-[RequireComponent(typeof(AddMarble))]
+[RequireComponent(typeof(scr_CreateMarble))]
 
 public class UpdateUsersWeb : MonoBehaviour {
 
     private string[] m_PrevUsersArr = { };
     private string[] m_UsersArr = { "" };
     private List<Color> m_ColorsArr = new List<Color>();
-    private DownloadTextWeb m_DT;
-    private AddMarble m_AM;
+    private scr_CreateMarble m_CreateScript;
     private Leaderboard m_L;
     private float m_AccuTime;
     private float m_MaxTime;
@@ -48,12 +46,11 @@ public class UpdateUsersWeb : MonoBehaviour {
     void Start() {
         gManager = GlobalManager.Instance();
 
-        m_DT = GetComponent<DownloadTextWeb>();
-        m_AM = GetComponent<AddMarble>();
+        m_CreateScript = GetComponent<scr_CreateMarble>();
         m_L = GameObject.Find("Canvas").GetComponentInChildren<Leaderboard>();
         m_MaxTime = gManager.gAddMarbleDelay;
         m_AccuTime = Mathf.Max(m_MaxTime - 1.0f, 0);
-        m_UsersArr = m_DT.GetUsersArr();
+        m_UsersArr = scr_UserManager.GetUsers();
         m_CenterText = GameObject.Find("CenterText").GetComponent<Text>();
         m_CenterText.enabled = true;
         m_CenterText.supportRichText = true;
@@ -87,10 +84,8 @@ public class UpdateUsersWeb : MonoBehaviour {
 
     private void DoUpdate()
     {
-        // Reread file
-        m_DT.Restart();
         // Reload userlist
-        m_UsersArr = m_DT.GetUsersArr();
+        m_UsersArr = scr_UserManager.GetUsers();
         // Add new users
         if (m_UsersArr != null)
         {
@@ -119,7 +114,7 @@ public class UpdateUsersWeb : MonoBehaviour {
             // Create marble
             int c = i;
             if (c >= m_ColorsArr.Count) c %= m_ColorsArr.Count;
-            m_AM.Create(m_UsersArr[i], m_ColorsArr[i]);
+            m_CreateScript.CreateMarble(m_UsersArr[i], m_ColorsArr[i], new Vector2(-5.5f, 5.0f), new Vector2(1.4f, 1.0f));
             // Add user to leaderboard
             m_L.AddUser(m_UsersArr[i], m_ColorsArr[i]);
             // Wait for specified time to add next marble

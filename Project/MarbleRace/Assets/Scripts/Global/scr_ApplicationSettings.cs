@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ApplicationSettings : MonoBehaviour {
+public class scr_ApplicationSettings : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {

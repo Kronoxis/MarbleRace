@@ -2,7 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 
-public class GlobalManager : Singleton<GlobalManager> {
+public class GlobalManager : scr_Singleton<GlobalManager> {
 
     // Leaderboard Format
     public enum LeaderboardFormat

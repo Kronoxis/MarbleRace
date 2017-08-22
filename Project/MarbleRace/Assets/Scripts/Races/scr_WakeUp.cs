@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WakeUp : MonoBehaviour {
+public class scr_WakeUp : MonoBehaviour {
 
     Rigidbody m_Rigidbody;
 
@@ -12,6 +12,8 @@ public class WakeUp : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        m_Rigidbody.WakeUp();
+        // Don't let Rigidbodies sleep
+        if (m_Rigidbody.IsSleeping())
+            m_Rigidbody.WakeUp();
 	}
 }

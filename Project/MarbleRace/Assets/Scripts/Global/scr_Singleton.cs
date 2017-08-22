@@ -2,7 +2,7 @@
 using System.Collections;
 
 // Template Singleton, Template also inherits from MonoBehaviour
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public class scr_Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     // FIELDS
     private static T _instance;
@@ -49,7 +49,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     }
 
     // Protect the use of new
-    protected Singleton() { }
+    protected scr_Singleton() { }
 
     public void OnDestroy()
     {

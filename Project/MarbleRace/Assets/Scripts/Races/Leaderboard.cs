@@ -196,7 +196,7 @@ public class Leaderboard : MonoBehaviour
     private float GetUserDist(int user)
     {
         float dist = 0;
-        GameObject marble = GameObject.Find("M." + m_UsersArr[user]);
+        GameObject marble = GameObject.Find(m_UsersArr[user]);
         Vector3 pos = marble.transform.position;
         Vector3 posCP = m_CheckpointsArr[m_CPNextArr[user]];
         float x1 = pos.x;
@@ -213,7 +213,7 @@ public class Leaderboard : MonoBehaviour
         int userNr = 0;
         for (int i = 0; i < m_UsersArr.Count; ++i)
         {
-            if ("M." + m_UsersArr[i] == userName)
+            if (m_UsersArr[i] == userName)
             {
                 userNr = i;
                 break;
