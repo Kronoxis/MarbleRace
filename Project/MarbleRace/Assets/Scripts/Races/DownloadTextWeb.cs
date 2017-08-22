@@ -21,7 +21,7 @@ public class DownloadTextWeb : MonoBehaviour
     {
         WebClient client = new WebClient();
         client.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(DownloadFileCompleted);
-        client.DownloadFileAsync((new System.Uri("http://pixelbot.nl/giveaway")), gManager.gSavePath + "EnteredUsers.txt");
+        client.DownloadFileAsync((new System.Uri(gManager.gGiveawayURL)), gManager.gSavePath + "EnteredUsers.txt");
     }
 
 

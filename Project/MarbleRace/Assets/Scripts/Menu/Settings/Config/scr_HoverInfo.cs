@@ -69,7 +69,7 @@ public class scr_HoverInfo : MonoBehaviour {
                     if (btn.name == m_ButtonNames[i])
                     {
                         // Set text
-                        transform.FindChild("Text").GetComponent<Text>().text = m_InfoTexts[i];
+                        transform.Find("Text").GetComponent<Text>().text = m_InfoTexts[i];
 
                         // Set Height of Panel
                         GetComponent<RectTransform>().sizeDelta = new Vector2(
@@ -77,8 +77,8 @@ public class scr_HoverInfo : MonoBehaviour {
                             m_Heights[i] + 5);
 
                         // Set Height of Text Box
-                        transform.FindChild("Text").GetComponent<RectTransform>().sizeDelta = new Vector2(
-                            transform.FindChild("Text").GetComponent<RectTransform>().rect.width,
+                        transform.Find("Text").GetComponent<RectTransform>().sizeDelta = new Vector2(
+                            transform.Find("Text").GetComponent<RectTransform>().rect.width,
                             m_Heights[i]);
 
                         // Set Position of HoverInfo

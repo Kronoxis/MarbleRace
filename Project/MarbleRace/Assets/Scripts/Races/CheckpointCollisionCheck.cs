@@ -9,7 +9,7 @@ public class CheckpointCollisionCheck : MonoBehaviour {
         {
             string name = other.name;
             int nr = int.Parse(gameObject.name.Substring(10));
-            GameObject.Find("Canvas").transform.FindChild("Panel").GetComponent<Leaderboard>().UpdateCheckpoint(name, nr);
+            GameObject.Find("Canvas").transform.Find("Panel").GetComponent<Leaderboard>().UpdateCheckpoint(name, nr);
         }
     }
 }

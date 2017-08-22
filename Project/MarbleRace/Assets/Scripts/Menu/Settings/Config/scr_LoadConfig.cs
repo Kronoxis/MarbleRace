@@ -19,18 +19,18 @@ public class scr_LoadConfig : MonoBehaviour {
         GameObject.Find("InputSaveFormat").GetComponent<Dropdown>().value = (int)gManager.gFormat;
 
         GameObject.Find("InputDownloadUsersDelay").GetComponent<Slider>().value = gManager.gDownloadUsersDelay;
-        GameObject.Find("InputDownloadUsersDelay").transform.parent.FindChild("SliderValue").GetComponent<InputField>().text = gManager.gDownloadUsersDelay.ToString();
+        GameObject.Find("InputDownloadUsersDelay").transform.parent.Find("SliderValue").GetComponent<InputField>().text = gManager.gDownloadUsersDelay.ToString();
 
         GameObject.Find("InputScoreboardUpdateDelay").GetComponent<Slider>().value = gManager.gScoreboardUpdateDelay;
-        GameObject.Find("InputScoreboardUpdateDelay").transform.parent.FindChild("SliderValue").GetComponent<InputField>().text = gManager.gScoreboardUpdateDelay.ToString();
+        GameObject.Find("InputScoreboardUpdateDelay").transform.parent.Find("SliderValue").GetComponent<InputField>().text = gManager.gScoreboardUpdateDelay.ToString();
         
         GameObject.Find("InputAddMarbleDelay").GetComponent<Slider>().value = gManager.gAddMarbleDelay;
-        GameObject.Find("InputAddMarbleDelay").transform.parent.FindChild("SliderValue").GetComponent<InputField>().text = gManager.gAddMarbleDelay.ToString();
+        GameObject.Find("InputAddMarbleDelay").transform.parent.Find("SliderValue").GetComponent<InputField>().text = gManager.gAddMarbleDelay.ToString();
 
         // Placeholder text
-        GameObject.Find("InputInputPath").transform.FindChild("Placeholder").GetComponent<Text>().text = gManager.gInputPath;
-        GameObject.Find("InputGiveawayURL").transform.FindChild("Placeholder").GetComponent<Text>().text = gManager.gGiveawayURL;
-        GameObject.Find("InputSpritePath").transform.FindChild("Placeholder").GetComponent<Text>().text = gManager.gSpritePath;
-        GameObject.Find("InputSavePath").transform.FindChild("Placeholder").GetComponent<Text>().text = gManager.gSavePath;
+        GameObject.Find("InputInputPath").transform.Find("Placeholder").GetComponent<Text>().text = gManager.gInputPath;
+        GameObject.Find("InputGiveawayURL").transform.Find("Placeholder").GetComponent<Text>().text = gManager.gGiveawayURL;
+        GameObject.Find("InputSpritePath").transform.Find("Placeholder").GetComponent<Text>().text = gManager.gSpritePath;
+        GameObject.Find("InputSavePath").transform.Find("Placeholder").GetComponent<Text>().text = gManager.gSavePath;
     }
 }
