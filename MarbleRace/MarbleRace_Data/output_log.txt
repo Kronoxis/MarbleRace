@@ -21,34 +21,48 @@ Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleR
 Loading E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
 Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\System.dll (this message is harmless)
 Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.019 seconds
+- Completed reload, in  0.024 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.112423 ms
+UnloadTime: 1.224534 ms
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.814287 ms
+UnloadTime: 5.699494 ms
 
 Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 397.
-Total: 0.292909 ms (FindLiveObjects: 0.026448 ms CreateObjectMapping: 0.014211 ms MarkObjects: 0.247512 ms  DeleteObjects: 0.003947 ms)
+Total: 0.307515 ms (FindLiveObjects: 0.024080 ms CreateObjectMapping: 0.016974 ms MarkObjects: 0.262118 ms  DeleteObjects: 0.004342 ms)
 
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.406204 ms
+UnloadTime: 0.418836 ms
 
 Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 709.
-Total: 0.372255 ms (FindLiveObjects: 0.060002 ms CreateObjectMapping: 0.031580 ms MarkObjects: 0.240406 ms  DeleteObjects: 0.039475 ms)
+Total: 0.427916 ms (FindLiveObjects: 0.046581 ms CreateObjectMapping: 0.033159 ms MarkObjects: 0.310278 ms  DeleteObjects: 0.037501 ms)
 
 Platform assembly: E:\Projects\Unity\MarbleRace\Marble Race - Repository\MarbleRace\MarbleRace_Data\Managed\Mono.Security.dll (this message is harmless)
-Checking for userlist update
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
 Updating userlist
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
+Giveaway has been closed
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Added Texture instead of Color for user mstiekema
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Finished updating userlist
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.759116 ms
+
+Unloading 77 unused Assets to reduce memory usage. Loaded Objects now: 398.
+Total: 0.854253 ms (FindLiveObjects: 0.042633 ms CreateObjectMapping: 0.030396 ms MarkObjects: 0.443311 ms  DeleteObjects: 0.336727 ms)
+
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 1f9c -> priority: 1 
-  Thread -> id: 2104 -> priority: 1 
-  Thread -> id: 2194 -> priority: 1 
-  Thread -> id: 23bc -> priority: 1 
+  Thread -> id: 114c -> priority: 1 
+  Thread -> id: 2008 -> priority: 1 
+  Thread -> id: 3198 -> priority: 1 
+  Thread -> id: 19dc -> priority: 1 
