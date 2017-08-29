@@ -27,13 +27,13 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
     // Use this for initialization
     void Start()
     {
-        // Remove old Input folder
-        if (Directory.Exists(DataPath + "input"))
-        {
-            if (File.Exists(DataPath + "input/controls.txt")) File.Delete(DataPath + "input/controls.txt");
-            if (File.Exists(DataPath + "input/config.txt")) File.Delete(DataPath + "input/config.txt");
-            Directory.Delete(DataPath + "input");
-        }
+        //// Remove old Input folder
+        //if (Directory.Exists(DataPath + "input"))
+        //{
+        //    if (File.Exists(DataPath + "input/controls.txt")) File.Delete(DataPath + "input/controls.txt");
+        //    if (File.Exists(DataPath + "input/config.txt")) File.Delete(DataPath + "input/config.txt");
+        //    Directory.Delete(DataPath + "input");
+        //}
         // Create Folders
         if (!Directory.Exists(DataPath + "settings")) Directory.CreateDirectory(DataPath + "settings");
         if (!Directory.Exists(DataPath + "sprites")) Directory.CreateDirectory(DataPath + "sprites");

@@ -20422,7 +20422,7 @@ Prefab:
     - target: {fileID: 114899307688315416, guid: 6efc6592e7efe0d4d8e9c30a5c935df4,
         type: 2}
       propertyPath: TurnLeft
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4687939076000652, guid: 6efc6592e7efe0d4d8e9c30a5c935df4, type: 2}
       propertyPath: m_LocalScale.z
@@ -24411,7 +24411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badf0451ca5511b449dbcdf9130582b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  URL: http://giveaway.yucibot.nl/pixelsrealm
   Delay: 0.5
   SplitChar: 32
   SpriteSource: 2

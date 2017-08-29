@@ -19,7 +19,6 @@ public class scr_Users : MonoBehaviour {
         Both
     }
 
-    public string URL = "http://giveaway.yucibot.nl/pixelsrealm";
     [Range(0.5f, 60.0f)]
     public float Delay = 1.0f;
     public char SplitChar = ' ';
@@ -81,7 +80,7 @@ public class scr_Users : MonoBehaviour {
         while (!scr_RaceInput.IsClosed)
         {
             // Download Webpage
-            WWW www = new WWW(URL);
+            WWW www = new WWW(scr_InputManager.URL);
             while (!www.isDone) yield return 0;
             string users = www.text;
             StoreUsers(users, SplitChar);
@@ -142,9 +141,8 @@ public class scr_Users : MonoBehaviour {
                             {
                                 // Convert file to tex
                                 tex = new Texture2D(128, 128, TextureFormat.RGB24, false);
-                                www = new WWW("file:///" + file);
-                                while (!www.isDone) yield return 0;
-                                www.LoadImageIntoTexture(tex);
+                                byte[] imageData = File.ReadAllBytes(file.FullName);
+                                tex.LoadImage(imageData);
                             }
                         }
                         break;
@@ -175,9 +173,8 @@ public class scr_Users : MonoBehaviour {
                             {
                                 // Convert file to tex
                                 tex = new Texture2D(128, 128, TextureFormat.RGB24, false);
-                                www = new WWW("file:///" + file);
-                                while (!www.isDone) yield return 0;
-                                www.LoadImageIntoTexture(tex);
+                                byte[] imageData = File.ReadAllBytes(file.FullName);
+                                tex.LoadImage(imageData);
                             }
                             // TWITCH
                             else
@@ -217,7 +214,7 @@ public class scr_Users : MonoBehaviour {
             }
 
             // Delay
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 
