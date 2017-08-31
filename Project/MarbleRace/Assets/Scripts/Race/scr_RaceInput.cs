@@ -63,9 +63,25 @@ public class scr_RaceInput : MonoBehaviour
         }
 
 #if UNITY_EDITOR
+        // DEBUG KEYS
+        // Manual Close
         if (Input.GetKeyUp(KeyCode.C))
         {
             IsClosed = true;
+        }
+
+        // TimeScale
+        if (Input.GetKey(KeyCode.KeypadPlus))
+        {
+            Time.timeScale *= 1.1f;
+        }
+        if (Input.GetKey(KeyCode.KeypadMinus))
+        {
+            Time.timeScale *= 0.9f;
+        }
+        if (Input.GetKeyUp(KeyCode.KeypadMultiply))
+        {
+            Time.timeScale = 1.0f;
         }
 #endif
     }

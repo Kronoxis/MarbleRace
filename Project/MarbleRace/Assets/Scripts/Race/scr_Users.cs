@@ -20,7 +20,8 @@ public class scr_Users : MonoBehaviour
 
     Text m_CenterText = null;
     Dictionary<string, float> m_JoinedUsersTime = new Dictionary<string, float>();
-    float m_LoadedMessageTime = 3.0f;
+    float m_LoadedMessageTime = 1.0f;
+    float m_ShowNameTime = 3.0f;
 
     // Use this for initialization
 	void Start ()
@@ -213,7 +214,7 @@ public class scr_Users : MonoBehaviour
         scr_Leaderboard.AddUserToLeaderboard(marble);
 
         // Add to timer
-        m_JoinedUsersTime.Add(name, 6.0f);
+        m_JoinedUsersTime.Add(name, m_ShowNameTime);
     }
 
     void UpdateCenterText()
