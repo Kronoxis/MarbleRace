@@ -5,21 +5,19 @@ using UnityEngine.UI;
 
 public class scr_Finish : MonoBehaviour {
 
-    Text m_CenterText = null;
-    bool m_IsFinished = false;
+    public Text m_CenterText = null;
     string m_WinnerName;
     string m_ColorHex;
 
-    // Use this for initialization
     void Start()
     {
-        m_CenterText = GameObject.FindGameObjectWithTag("CenterText").GetComponent<Text>();
+        scr_InputManager.IsFinished = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_IsFinished && !m_CenterText.gameObject.activeInHierarchy)
+        if (scr_InputManager.IsFinished && !m_CenterText.gameObject.activeInHierarchy)
         {
             m_CenterText.text = "<color=#" + m_ColorHex + ">Winner:\n" + m_WinnerName + "</color>";
             m_CenterText.gameObject.SetActive(true);
@@ -30,9 +28,9 @@ public class scr_Finish : MonoBehaviour {
     {
         if (other.tag != "Marble") return;
 
-        if (!m_IsFinished)
+        if (!scr_InputManager.IsFinished)
         {
-            m_IsFinished = true;
+            scr_InputManager.IsFinished = true;
             m_ColorHex = scr_Leaderboard.GetHexColor(other.name);
             if (m_ColorHex == null) m_ColorHex = "FFFFFF";
             m_WinnerName = other.name;

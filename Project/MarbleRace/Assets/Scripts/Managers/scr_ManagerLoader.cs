@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scr_ManagerLoader : MonoBehaviour {
-
+public class scr_ManagerLoader : MonoBehaviour
+{
 	// Use this for initialization
-	void Start () {
+	void Awake ()
+    {
         // Input Manager
         scr_InputManager.Instance();
 	}

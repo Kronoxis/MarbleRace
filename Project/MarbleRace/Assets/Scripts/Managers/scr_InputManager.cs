@@ -1,40 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 
-public class scr_InputManager : scr_Singleton<scr_InputManager> {
+public class scr_InputManager : scr_Singleton<scr_InputManager>
+{
+    public enum SpriteSources
+    {
+        None,
+        Local,
+        Twitch,
+        Both
+    }
 
     // Configuration
     public static string URL = "http://giveaway.yucibot.nl/pixelsrealm";
     public static string DataPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "/MarbleRace/data/";
     public static float DownloadDelay = 1.0f;
     public static float UpdateDelay = 0.1f;
+    public static float ReleaseTimer = 3.0f;
+    public static SpriteSources SpriteSource = SpriteSources.Both;
 
-    // Keys
-    public KeyCode Key_Start = KeyCode.Space;
+    public static KeyCode Key_Start = KeyCode.Space;
+    public static KeyCode Key_ZoomIn = KeyCode.LeftShift;
+    public static KeyCode Key_ZoomOut = KeyCode.LeftControl;
+    public static KeyCode Key_AddTest = KeyCode.Return;
+    public static KeyCode Key_Move = KeyCode.Mouse1;
+    public static KeyCode Key_Recenter = KeyCode.Mouse2;
+    public static float MoveSpeed = 1.0f;
+    public static float ZoomSpeed = 1.0f;
+
+    // Variables
+    public static List<KeyCode> Keys = new List<KeyCode>();
+    public static bool IsFinished = false;
 
     // Version 
-    static string m_Version = "2.0";
+    static string m_Version = "2.1";
 
     // Application Settings
     void Awake()
     {
         Application.targetFrameRate = 60;
         Application.runInBackground = true;
-    }
 
-    // Use this for initialization
-    void Start()
-    {
-        //// Remove old Input folder
-        //if (Directory.Exists(DataPath + "input"))
-        //{
-        //    if (File.Exists(DataPath + "input/controls.txt")) File.Delete(DataPath + "input/controls.txt");
-        //    if (File.Exists(DataPath + "input/config.txt")) File.Delete(DataPath + "input/config.txt");
-        //    Directory.Delete(DataPath + "input");
-        //}
         // Create Folders
+        if (!Directory.Exists(DataPath + "races")) Directory.CreateDirectory(DataPath + "races");
         if (!Directory.Exists(DataPath + "settings")) Directory.CreateDirectory(DataPath + "settings");
         if (!Directory.Exists(DataPath + "sprites")) Directory.CreateDirectory(DataPath + "sprites");
         if (!Directory.Exists(DataPath + "saves")) Directory.CreateDirectory(DataPath + "saves");
@@ -42,18 +53,16 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
         // If Settings File exist
         // Load Settings at start
         // Else, Save Default
-        if (File.Exists(DataPath + "settings/Config.txt")) LoadConfig();
-        else SaveConfig();
-        if (File.Exists(DataPath + "settings/Keys.txt")) LoadKeys();
-        else SaveKeys();
-	}
+        if (File.Exists(DataPath + "settings/Settings.txt")) LoadSettings();
+        else SaveSettings();
+    }
 
-    public void SaveConfig()
+    public static void SaveSettings()
     {
-        Debug.Log("Saving Config...");
+        Debug.Log("Saving Settings...");
 
         // Open File
-        StreamWriter writer = new StreamWriter(DataPath + "settings/config.txt");
+        StreamWriter writer = new StreamWriter(DataPath + "settings/Settings.txt");
 
         // Write Version
         writer.WriteLine(m_Version);
@@ -63,15 +72,28 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
         writer.WriteLine("DataPath = " + DataPath);
         writer.WriteLine("DownloadDelay = " + DownloadDelay.ToString());
         writer.WriteLine("UpdateDelay = " + UpdateDelay.ToString());
+        writer.WriteLine("ReleaseTimer = " + ReleaseTimer.ToString());
+        writer.WriteLine("SpriteSource = " + SpriteSource.ToString());
+
+        writer.WriteLine("StartKey = " + KeyCodeToString(Key_Start));
+        writer.WriteLine("ZoomInKey = " + KeyCodeToString(Key_ZoomIn));
+        writer.WriteLine("ZoomOutKey = " + KeyCodeToString(Key_ZoomOut));
+        writer.WriteLine("AddTestKey = " + KeyCodeToString(Key_AddTest));
+        writer.WriteLine("MoveKey = " + KeyCodeToString(Key_Move));
+        writer.WriteLine("RecenterKey = " + KeyCodeToString(Key_Recenter));
+        writer.WriteLine("MoveSpeed = " + MoveSpeed.ToString());
+        writer.WriteLine("ZoomSpeed = " + ZoomSpeed.ToString());
+
+        UpdateKeys();
 
         // Close File
         writer.Close();
     }
 
-    public void LoadConfig()
+    public static void LoadSettings()
     {
         // Open File
-        StreamReader reader = new StreamReader(DataPath + "settings/config.txt");
+        StreamReader reader = new StreamReader(DataPath + "settings/Settings.txt");
 
         // Read Version
         if (reader.ReadLine() != m_Version)
@@ -79,7 +101,8 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
             // Version doesn't match, delete file and save default
             reader.Close();
             File.Delete(DataPath + "settings/config.txt");
-            SaveConfig();
+            SaveSettings();
+            return;
         }
 
         // Read Config
@@ -87,57 +110,49 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
         DataPath = FileStrToValueStr(reader.ReadLine());
         DownloadDelay = float.Parse(FileStrToValueStr(reader.ReadLine()));
         UpdateDelay = float.Parse(FileStrToValueStr(reader.ReadLine()));
+        ReleaseTimer = float.Parse(FileStrToValueStr(reader.ReadLine()));
+        SpriteSource = (SpriteSources)(System.Enum.Parse(typeof(SpriteSources), FileStrToValueStr(reader.ReadLine())));
 
-        // Close File
-        reader.Close();
-    }
-
-    public void SaveKeys()
-    {
-        Debug.Log("Saving Keys...");
-
-        // Open File
-        StreamWriter writer = new StreamWriter(DataPath + "settings/keys.txt");
-
-        // Write Version
-        writer.WriteLine(m_Version);
-
-        // Write Keys
-        writer.WriteLine("Start = " + KeyCodeToString(Key_Start));
-
-        // Close File
-        writer.Close();
-    }
-
-    public void LoadKeys()
-    {
-        // Open File
-        StreamReader reader = new StreamReader(DataPath + "settings/keys.txt");
-
-        // Read Version
-        if (reader.ReadLine() != m_Version)
-        {
-            // Version doesn't match, delete file and save default
-            reader.Close();
-            File.Delete(DataPath + "settings/keys.txt");
-            SaveKeys();
-        }
-
-        // Read Keys
         Key_Start = StringToKeyCode(FileStrToValueStr(reader.ReadLine()));
+        Key_ZoomIn = StringToKeyCode(FileStrToValueStr(reader.ReadLine()));
+        Key_ZoomOut = StringToKeyCode(FileStrToValueStr(reader.ReadLine()));
+        Key_AddTest = StringToKeyCode(FileStrToValueStr(reader.ReadLine()));
+        Key_Move = StringToKeyCode(FileStrToValueStr(reader.ReadLine()));
+        Key_Recenter = StringToKeyCode(FileStrToValueStr(reader.ReadLine()));
+        MoveSpeed = float.Parse(FileStrToValueStr(reader.ReadLine()));
+        ZoomSpeed = float.Parse(FileStrToValueStr(reader.ReadLine()));
+
+        UpdateKeys();
 
         // Close File
         reader.Close();
     }
 
-    // Helper Methods
-    string FileStrToValueStr(string s)
+    static void UpdateKeys()
     {
+        Keys = new List<KeyCode> { Key_Start, Key_ZoomIn, Key_ZoomOut, Key_AddTest, Key_Move, Key_Recenter };
+    }
+
+    public static void SetKeysFromList()
+    {
+        Key_Start = Keys[0];
+        Key_ZoomIn = Keys[1];
+        Key_ZoomOut = Keys[2];
+        Key_AddTest = Keys[3];
+        Key_Move = Keys[4];
+        Key_Recenter = Keys[5];
+    }
+
+    #region Helpers
+    static string FileStrToValueStr(string s)
+    {
+        if (s == null) return null;
         return s.Substring(s.IndexOf('=') + 2);
     }
 
-    public KeyCode StringToKeyCode(string keyName)
+    public static KeyCode StringToKeyCode(string keyName)
     {
+        if (keyName == null) return KeyCode.None;
         KeyCode key = KeyCode.None;
         switch (keyName)
         {
@@ -180,7 +195,7 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
             case "Break":
                 key = KeyCode.Break;
                 break;
-            case "CapsLock":
+            case "Caps Lock":
                 key = KeyCode.CapsLock;
                 break;
             case "Clear":
@@ -243,67 +258,67 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
             case "Insert":
                 key = KeyCode.Insert;
                 break;
-            case "Num0":
+            case "Numpad 0":
                 key = KeyCode.Keypad0;
                 break;
-            case "Num1":
+            case "Numpad 1":
                 key = KeyCode.Keypad1;
                 break;
-            case "Num2":
+            case "Numpad 2":
                 key = KeyCode.Keypad2;
                 break;
-            case "Num3":
+            case "Numpad 3":
                 key = KeyCode.Keypad3;
                 break;
-            case "Num4":
+            case "Numpad 4":
                 key = KeyCode.Keypad4;
                 break;
-            case "Num5":
+            case "Numpad 5":
                 key = KeyCode.Keypad5;
                 break;
-            case "Num6":
+            case "Numpad 6":
                 key = KeyCode.Keypad6;
                 break;
-            case "Num7":
+            case "Numpad 7":
                 key = KeyCode.Keypad7;
                 break;
-            case "Num8":
+            case "Numpad 8":
                 key = KeyCode.Keypad8;
                 break;
-            case "Num9":
+            case "Numpad 9":
                 key = KeyCode.Keypad9;
                 break;
-            case "Num/":
+            case "Numpad /":
                 key = KeyCode.KeypadDivide;
                 break;
-            case "NumEnter":
+            case "Numpad Enter":
                 key = KeyCode.KeypadEnter;
                 break;
-            case "Num=":
+            case "Numpad =":
                 key = KeyCode.KeypadEquals;
                 break;
-            case "Num-":
+            case "Numpad -":
                 key = KeyCode.KeypadMinus;
                 break;
-            case "Num*":
+            case "Numpad *":
                 key = KeyCode.KeypadMultiply;
                 break;
-            case "Num.":
+            case "Numpad .":
                 key = KeyCode.KeypadPeriod;
                 break;
-            case "Num+":
+            case "Numpad +":
                 key = KeyCode.KeypadPlus;
                 break;
-            case "LAlt":
+            case "Left Alt":
                 key = KeyCode.LeftAlt;
                 break;
             case "Left":
                 key = KeyCode.LeftArrow;
                 break;
-            case "LCtrl":
+            case "Left Ctrl":
                 key = KeyCode.LeftControl;
                 break;
-            case "LShift":
+            case "Left Shift":
                 key = KeyCode.LeftShift;
                 break;
             case "LMB":
@@ -315,13 +330,13 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
             case "MMB":
                 key = KeyCode.Mouse2;
                 break;
-            case "NumLock":
+            case "Num Lock":
                 key = KeyCode.Numlock;
                 break;
-            case "PgDn":
+            case "Page Down":
                 key = KeyCode.PageDown;
                 break;
-            case "PgUp":
+            case "Page Up":
                 key = KeyCode.PageUp;
                 break;
             case "Print":
@@ -330,19 +345,19 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
             case "Return":
                 key = KeyCode.Return;
                 break;
-            case "RAlt":
+            case "Right Alt":
                 key = KeyCode.RightAlt;
                 break;
             case "Right":
                 key = KeyCode.RightArrow;
                 break;
-            case "RCtrl":
+            case "Right Ctrl":
                 key = KeyCode.RightControl;
                 break;
-            case "RShift":
+            case "Right Shift":
                 key = KeyCode.RightShift;
                 break;
-            case "ScrollLock":
+            case "Scroll Lock":
                 key = KeyCode.ScrollLock;
                 break;
             case "Space":
@@ -365,7 +380,7 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
         return key;
     }
 
-    public string KeyCodeToString(KeyCode key)
+    public static string KeyCodeToString(KeyCode key)
     {
         string keyName = null;
         switch (key)
@@ -410,7 +425,7 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
                 keyName = "Break";
                 break;
             case KeyCode.CapsLock:
-                keyName = "CapsLock";
+                keyName = "Caps Lock";
                 break;
             case KeyCode.Clear:
                 keyName = "Clear";
@@ -473,67 +488,67 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
                 keyName = "Insert";
                 break;
             case KeyCode.Keypad0:
-                keyName = "Num0";
+                keyName = "Numpad 0";
                 break;
             case KeyCode.Keypad1:
-                keyName = "Num1";
+                keyName = "Numpad 1";
                 break;
             case KeyCode.Keypad2:
-                keyName = "Num2";
+                keyName = "Numpad 2";
                 break;
             case KeyCode.Keypad3:
-                keyName = "Num3";
+                keyName = "Numpad 3";
                 break;
             case KeyCode.Keypad4:
-                keyName = "Num4";
+                keyName = "Numpad 4";
                 break;
             case KeyCode.Keypad5:
-                keyName = "Num5";
+                keyName = "Numpad 5";
                 break;
             case KeyCode.Keypad6:
-                keyName = "Num6";
+                keyName = "Numpad 6";
                 break;
             case KeyCode.Keypad7:
-                keyName = "Num7";
+                keyName = "Numpad 7";
                 break;
             case KeyCode.Keypad8:
-                keyName = "Num8";
+                keyName = "Numpad 8";
                 break;
             case KeyCode.Keypad9:
-                keyName = "Num9";
+                keyName = "Numpad 9";
                 break;
             case KeyCode.KeypadDivide:
-                keyName = "Num/";
+                keyName = "Numpad /";
                 break;
             case KeyCode.KeypadEnter:
-                keyName = "NumEnter";
+                keyName = "Numpad Enter";
                 break;
             case KeyCode.KeypadEquals:
-                keyName = "Num=";
+                keyName = "Numpad =";
                 break;
             case KeyCode.KeypadMinus:
-                keyName = "Num-";
+                keyName = "Numpad -";
                 break;
             case KeyCode.KeypadMultiply:
-                keyName = "Num*";
+                keyName = "Numpad *";
                 break;
             case KeyCode.KeypadPeriod:
-                keyName = "Num.";
+                keyName = "Numpad .";
                 break;
             case KeyCode.KeypadPlus:
-                keyName = "Num+";
+                keyName = "Numpad +";
                 break;
             case KeyCode.LeftAlt:
-                keyName = "LAlt";
+                keyName = "Left Alt";
                 break;
             case KeyCode.LeftArrow:
                 keyName = "Left";
                 break;
             case KeyCode.LeftControl:
-                keyName = "LCtrl";
+                keyName = "Left Ctrl";
                 break;
             case KeyCode.LeftShift:
-                keyName = "LShift";
+                keyName = "Left Shift";
                 break;
             case KeyCode.Mouse0:
                 keyName = "LMB";
@@ -545,13 +560,13 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
                 keyName = "MMB";
                 break;
             case KeyCode.Numlock:
-                keyName = "NumLock";
+                keyName = "Num Lock";
                 break;
             case KeyCode.PageDown:
-                keyName = "PgDn";
+                keyName = "Page Down";
                 break;
             case KeyCode.PageUp:
-                keyName = "PgUp";
+                keyName = "Page Up";
                 break;
             case KeyCode.Print:
                 keyName = "Print";
@@ -560,19 +575,19 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
                 keyName = "Return";
                 break;
             case KeyCode.RightAlt:
-                keyName = "RAlt";
+                keyName = "Right Alt";
                 break;
             case KeyCode.RightArrow:
                 keyName = "Right";
                 break;
             case KeyCode.RightControl:
-                keyName = "RCtrl";
+                keyName = "Right Ctrl";
                 break;
             case KeyCode.RightShift:
-                keyName = "RShift";
+                keyName = "Right Shift";
                 break;
             case KeyCode.ScrollLock:
-                keyName = "ScrollLock";
+                keyName = "Scroll Lock";
                 break;
             case KeyCode.Space:
                 keyName = "Space";
@@ -592,4 +607,5 @@ public class scr_InputManager : scr_Singleton<scr_InputManager> {
             keyName = key.ToString();
         return keyName;
     }
+    #endregion
 }

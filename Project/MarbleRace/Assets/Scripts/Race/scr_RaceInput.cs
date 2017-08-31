@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class scr_RaceInput : MonoBehaviour {
-
+public class scr_RaceInput : MonoBehaviour
+{
     public enum SpawnShapes
     {
         Circle,
@@ -13,7 +13,6 @@ public class scr_RaceInput : MonoBehaviour {
 
     public static bool IsClosed = false;
     public static bool IsDoneLoading = false;
-    public float ReleaseTimer = 3.0f;
     public static bool RandomizeSpawn = true;
     public static SpawnShapes SpawnShape = SpawnShapes.Circle;
     public static Vector2 SpawnHalfSize = new Vector2(3, 3);
@@ -47,15 +46,9 @@ public class scr_RaceInput : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (IsDoneLoading && Input.GetKeyUp(scr_InputManager.Instance().Key_Start))
+        if (IsDoneLoading && Input.GetKeyUp(scr_InputManager.Key_Start))
         {
-            StartCoroutine(ReleaseMarbles(ReleaseTimer));
-        }
-
-        if (Input.GetKey(KeyCode.Return))
-        {
-            ++m_NumberOfTestMarbles;
-            GetComponent<scr_CreateMarble>().CreateMarble("test" + m_NumberOfTestMarbles, null);
+            StartCoroutine(ReleaseMarbles(scr_InputManager.ReleaseTimer));
         }
 
         if (IsClosed && Instructions.activeInHierarchy)
@@ -63,10 +56,18 @@ public class scr_RaceInput : MonoBehaviour {
             Instructions.SetActive(false);
         }
 
+        if (Input.GetKey(scr_InputManager.Key_AddTest))
+        {
+            ++m_NumberOfTestMarbles;
+            GetComponent<scr_Users>().CreateMarble("test" + m_NumberOfTestMarbles, null);
+        }
+
+#if UNITY_EDITOR
         if (Input.GetKeyUp(KeyCode.C))
         {
             IsClosed = true;
         }
+#endif
     }
 
     IEnumerator ReleaseMarbles(float time)

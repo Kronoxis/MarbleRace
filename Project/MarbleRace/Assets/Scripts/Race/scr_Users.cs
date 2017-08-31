@@ -10,23 +10,10 @@ using System.Linq;
 [RequireComponent(typeof(scr_CreateMarble))]
 [RequireComponent(typeof(scr_Leaderboard))]
 
-public class scr_Users : MonoBehaviour {
-
-    public enum SpriteSources
-    {
-        Local,
-        Twitch,
-        Both
-    }
-
-    [Range(0.5f, 60.0f)]
-    public float Delay = 1.0f;
-    public char SplitChar = ' ';
-    [Tooltip("Local: File > Color \nTwitch: Twitch > Color \nBoth: Local > Twitch > Color")]
-    public SpriteSources SpriteSource = SpriteSources.Both;
-
-    static List<string> m_Usernames = new List<string>();
+public class scr_Users : MonoBehaviour
+{
     static List<GameObject> m_Userlist = new List<GameObject>();
+    List<string> m_Usernames = new List<string>();
 
     List<FileInfo> m_SpriteFiles = new List<FileInfo>();
     scr_CreateMarble m_CreateMarbleScript;
@@ -38,11 +25,17 @@ public class scr_Users : MonoBehaviour {
     // Use this for initialization
 	void Start ()
     {
+        // Clear Static Arrays
+        m_Userlist.Clear();
+
+        // Set Bools
+        scr_RaceInput.IsClosed = false;
+
         // Get Scripts
         m_CreateMarbleScript = GetComponent<scr_CreateMarble>();
 
         // Get Sprites
-        if (SpriteSource == SpriteSources.Local || SpriteSource == SpriteSources.Both)
+        if (scr_InputManager.SpriteSource == scr_InputManager.SpriteSources.Local || scr_InputManager.SpriteSource == scr_InputManager.SpriteSources.Both)
         {
             // Get Files from Directory
             DirectoryInfo info = new DirectoryInfo(scr_InputManager.DataPath + "sprites");
@@ -83,10 +76,10 @@ public class scr_Users : MonoBehaviour {
             WWW www = new WWW(scr_InputManager.URL);
             while (!www.isDone) yield return 0;
             string users = www.text;
-            StoreUsers(users, SplitChar);
+            StoreUsers(users, ' ');
 
             // Delay
-            yield return new WaitForSeconds(Delay);
+            yield return new WaitForSeconds(scr_InputManager.DownloadDelay);
         }
     }
 
@@ -130,9 +123,9 @@ public class scr_Users : MonoBehaviour {
                 // Marble Skin
                 Texture2D tex = null;
                 WWW www = null;
-                switch (SpriteSource)
+                switch (scr_InputManager.SpriteSource)
                 {
-                    case SpriteSources.Local:
+                    case scr_InputManager.SpriteSources.Local:
                         {
                             // LOCAL
                             // Get file
@@ -146,7 +139,7 @@ public class scr_Users : MonoBehaviour {
                             }
                         }
                         break;
-                    case SpriteSources.Twitch:
+                    case scr_InputManager.SpriteSources.Twitch:
                         {
                             // TWITCH
                             // Get link
@@ -164,7 +157,7 @@ public class scr_Users : MonoBehaviour {
                             }
                         }
                         break;
-                    case SpriteSources.Both:
+                    case scr_InputManager.SpriteSources.Both:
                         {
                             // LOCAL
                             // Get file
@@ -200,22 +193,27 @@ public class scr_Users : MonoBehaviour {
                 // Set Texture name
                 if (tex) tex.name = name;
 
-                // Create Marble
-                var marble = m_CreateMarbleScript.CreateMarble(name, tex);
-
-                // Add to list
-                m_Userlist.Add(marble);
-
-                // Add to Leaderboard
-                scr_Leaderboard.AddUserToLeaderboard(marble);
-
-                // Add to timer
-                m_JoinedUsersTime.Add(name, 6.0f);
+                CreateMarble(name, tex);
             }
 
             // Delay
             yield return new WaitForSeconds(0.25f);
         }
+    }
+
+    public void CreateMarble(string name, Texture2D tex)
+    {
+        // Create Marble
+        var marble = m_CreateMarbleScript.CreateMarble(name, tex);
+
+        // Add to list
+        m_Userlist.Add(marble);
+
+        // Add to Leaderboard
+        scr_Leaderboard.AddUserToLeaderboard(marble);
+
+        // Add to timer
+        m_JoinedUsersTime.Add(name, 6.0f);
     }
 
     void UpdateCenterText()
@@ -259,7 +257,7 @@ public class scr_Users : MonoBehaviour {
         // Clear
         else if (m_LoadedMessageTime <= 0.0f)
         {
-            m_CenterText.text = "<color=#AAAAAA><b>Press " + scr_InputManager.Instance().KeyCodeToString(scr_InputManager.Instance().Key_Start) + " to Start!</b></color>";
+            m_CenterText.text = "<color=#101010><b>Press <i>" + scr_InputManager.KeyCodeToString(scr_InputManager.Key_Start) + "</i> to Start!</b></color>";
             m_LoadedMessageTime = -1.0f;
             scr_RaceInput.IsDoneLoading = true;
         }

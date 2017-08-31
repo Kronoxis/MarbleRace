@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class scr_FreeCamera : MonoBehaviour {
 
-    public float MoveSpeed = 1;
-    public float ZoomSpeed = 1;
-
     Vector3 m_StartPosition;
     Camera m_Cam;
 
@@ -20,12 +17,13 @@ public class scr_FreeCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // First frame of mouse button down: Set begin position
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(scr_InputManager.Key_Move))
         {
             m_StartPosition = Input.mousePosition;
         }
 
-		if (Input.GetMouseButton(1))
+        // Move Camera
+		if (Input.GetKey(scr_InputManager.Key_Move))
         {
             var mousePos = Input.mousePosition;
             float deltaX = mousePos.x - m_StartPosition.x;
@@ -34,19 +32,33 @@ public class scr_FreeCamera : MonoBehaviour {
             float ndcdY = deltaY / Screen.height;
 
             transform.Translate(
-                ndcdX * MoveSpeed * m_Cam.orthographicSize / 5.0f, 
-                ndcdY * MoveSpeed * m_Cam.orthographicSize / 5.0f, 
+                ndcdX * scr_InputManager.MoveSpeed * m_Cam.orthographicSize / 5.0f, 
+                ndcdY * scr_InputManager.MoveSpeed * m_Cam.orthographicSize / 5.0f, 
                 0);
         }
 
-        if (Input.GetMouseButtonUp(2))
+        // Reset Position to Spawn with MMB
+        if (Input.GetKeyUp(scr_InputManager.Key_Recenter))
         {
             Vector3 spawn = scr_RaceInput.GetSpawn();
             spawn.z = -10;
             transform.position = spawn;
         }
 
-        m_Cam.orthographicSize -= Input.mouseScrollDelta.y / 2.0f * ZoomSpeed * m_Cam.orthographicSize / 5.0f;
+        // Zoom Camera with Scroll Wheel
+        m_Cam.orthographicSize -= Input.mouseScrollDelta.y / 2.0f * scr_InputManager.ZoomSpeed * m_Cam.orthographicSize / 5.0f;
+
+        // Zoom Camera with Keys
+        if (Input.GetKey(scr_InputManager.Key_ZoomIn))
+        {
+            m_Cam.orthographicSize *= 1.0f - 0.05f * scr_InputManager.ZoomSpeed;
+        }
+        else if (Input.GetKey(scr_InputManager.Key_ZoomOut))
+        {
+            m_Cam.orthographicSize *= 1.0f + 0.05f * scr_InputManager.ZoomSpeed;
+        }
+
+        // Limit Zoom
         m_Cam.orthographicSize = Mathf.Clamp(m_Cam.orthographicSize, 1, 1000);
     }
 }

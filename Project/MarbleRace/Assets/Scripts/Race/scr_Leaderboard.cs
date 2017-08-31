@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class LeaderboardValue
 {
@@ -35,8 +36,8 @@ public class LeaderboardValue
     }
 }
 
-public class scr_Leaderboard : MonoBehaviour {
-
+public class scr_Leaderboard : MonoBehaviour
+{
     public Text Ranking;
     string m_RawRanking;
 
@@ -47,6 +48,9 @@ public class scr_Leaderboard : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        // Clear Static Arrays
+        m_LeaderboardValues.Clear();
+
         // Checkpoints
         var checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         for (int i = 0; i < checkpoints.Length; ++i)
@@ -230,11 +234,6 @@ public class scr_Leaderboard : MonoBehaviour {
         m_LeaderboardValues[userNr].Checkpoint = checkpointNr + 1;
     }
 
-    public string GetRanking()
-    {
-        return m_RawRanking;
-    }
-
     public static string GetHexColor(string user)
     {
         var value = m_LeaderboardValues.Find(x => x.Name == user);
@@ -252,5 +251,38 @@ public class scr_Leaderboard : MonoBehaviour {
         bHex = bHex.Length == 1 ? bHex + "0" : bHex;
 
         return rHex + gHex + bHex;
+    }
+
+    public void SaveLeaderboard(bool saveIfUnfinished)
+    {
+        if (!saveIfUnfinished && !scr_InputManager.IsFinished) return;
+
+        string fileName = "Leaderboard_" + GetDateTime() + ".txt";
+        StreamWriter writer = new StreamWriter(scr_InputManager.DataPath + "saves/" + fileName);
+        writer.Write(m_RawRanking);
+        writer.Close();
+    }
+
+    string GetDateTime()
+    {
+        string day = System.DateTime.Now.Day.ToString();
+        if (day.Length == 1)
+            day = "0" + day;
+        string month = System.DateTime.Now.Month.ToString();
+        if (month.Length == 1)
+            month = "0" + month;
+        string year = System.DateTime.Now.Year.ToString();
+        string hour = System.DateTime.Now.Hour.ToString();
+        if (hour.Length == 1)
+            hour = "0" + hour;
+        string minutes = System.DateTime.Now.Minute.ToString();
+        if (minutes.Length == 1)
+            minutes = "0" + minutes;
+        string seconds = System.DateTime.Now.Second.ToString();
+        if (seconds.Length == 1)
+            seconds = "0" + seconds;
+
+        // Ordered correctly by name
+        return year + month + day + "_" + hour + minutes + seconds;
     }
 }
