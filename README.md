@@ -1,6 +1,17 @@
 # MarbleRace
 Marble Race - Giveaway System
 
+# v2.1.1 _(31 Aug 2017)_
+## NEW
+- Race Descriptions (Loaded from DataPath/races/)
+- Fonts
+## CHANGES
+- Main Menu
+- Settings Menu
+- Race Select Menu
+- Zooming Keys
+- Minor Tweaks (Timing and bounciness)
+
 # v2.0.1 _(29 Aug 2017)_ [WIP]
 ## NEW
 - Launchpad
@@ -10,10 +21,6 @@ Marble Race - Giveaway System
 ## CHANGES
 - Sprites are now also loaded from Twitch
 - Races are now built using modular meshes (~Lego)
-## TO DO
-- Main menu
-- Settings menu
-- Race Select menu
 
 # v1.1.3 _(26 Aug 2017)_
 ## FIXES
