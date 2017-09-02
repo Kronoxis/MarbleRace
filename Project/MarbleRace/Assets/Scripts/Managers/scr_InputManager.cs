@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEditor;
 
 public class scr_InputManager : scr_Singleton<scr_InputManager>
 {
@@ -45,14 +46,36 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
         Application.runInBackground = true;
 
         // Create Folders
-        if (!Directory.Exists(DataPath + "races")) Directory.CreateDirectory(DataPath + "races");
-        if (!Directory.Exists(DataPath + "settings")) Directory.CreateDirectory(DataPath + "settings");
-        if (!Directory.Exists(DataPath + "sprites")) Directory.CreateDirectory(DataPath + "sprites");
-        if (!Directory.Exists(DataPath + "saves")) Directory.CreateDirectory(DataPath + "saves");
+        CreateFolders();
 
-        // If Settings File exist
-        // Load Settings at start
-        // Else, Save Default
+        // Create Files
+        CreateFiles();
+    }
+
+    public static void CreateFolders()
+    {
+        // DataPath
+        if (!Directory.Exists(DataPath)) Directory.CreateDirectory(DataPath);
+        // Races
+        if (!Directory.Exists(DataPath + "races")) Directory.CreateDirectory(DataPath + "races");
+        // Settings
+        if (!Directory.Exists(DataPath + "settings")) Directory.CreateDirectory(DataPath + "settings");
+        // Sprites
+        if (!Directory.Exists(DataPath + "sprites")) Directory.CreateDirectory(DataPath + "sprites");
+        // Saves
+        if (!Directory.Exists(DataPath + "saves")) Directory.CreateDirectory(DataPath + "saves");
+    }
+
+    public static void CreateFiles()
+    {
+        // Races
+        if (!File.Exists(DataPath + "races/Small.txt")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/races/Small.txt", DataPath + "races/Small.txt");
+        if (!File.Exists(DataPath + "races/Big.txt")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/races/Big.txt", DataPath + "races/Big.txt");
+        // Sprites
+        if (!File.Exists(DataPath + "sprites/mstiekema.jpeg")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/sprites/mstiekema.jpeg", DataPath + "sprites/mstiekema.jpeg");
+        if (!File.Exists(DataPath + "sprites/pixelsrealm.jpg")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/sprites/pixelsrealm.jpg", DataPath + "sprites/pixelsrealm.jpg");
+        if (!File.Exists(DataPath + "sprites/Thycon.png")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/sprites/Thycon.png", DataPath + "sprites/Thycon.png");
+        // Settings
         if (File.Exists(DataPath + "settings/Settings.txt")) LoadSettings();
         else SaveSettings();
     }

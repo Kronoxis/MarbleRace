@@ -38,6 +38,8 @@ public class scr_Users : MonoBehaviour
         // Get Sprites
         if (scr_InputManager.SpriteSource == scr_InputManager.SpriteSources.Local || scr_InputManager.SpriteSource == scr_InputManager.SpriteSources.Both)
         {
+            scr_InputManager.CreateFolders();
+            scr_InputManager.CreateFiles();
             // Get Files from Directory
             DirectoryInfo info = new DirectoryInfo(scr_InputManager.DataPath + "sprites");
             FileInfo[] files = info.GetFiles();
