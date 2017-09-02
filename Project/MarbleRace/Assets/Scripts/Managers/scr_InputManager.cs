@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
-using UnityEditor;
 
 public class scr_InputManager : scr_Singleton<scr_InputManager>
 {
@@ -69,12 +68,12 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
     public static void CreateFiles()
     {
         // Races
-        if (!File.Exists(DataPath + "races/Small.txt")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/races/Small.txt", DataPath + "races/Small.txt");
-        if (!File.Exists(DataPath + "races/Big.txt")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/races/Big.txt", DataPath + "races/Big.txt");
+        if (!File.Exists(DataPath + "races/Small.txt")) File.Copy(Application.dataPath + "/DefaultFiles/races/Small.txt", DataPath + "races/Small.txt");
+        if (!File.Exists(DataPath + "races/Big.txt")) File.Copy(Application.dataPath + "/DefaultFiles/races/Big.txt", DataPath + "races/Big.txt");
         // Sprites
-        if (!File.Exists(DataPath + "sprites/mstiekema.jpeg")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/sprites/mstiekema.jpeg", DataPath + "sprites/mstiekema.jpeg");
-        if (!File.Exists(DataPath + "sprites/pixelsrealm.jpg")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/sprites/pixelsrealm.jpg", DataPath + "sprites/pixelsrealm.jpg");
-        if (!File.Exists(DataPath + "sprites/Thycon.png")) FileUtil.CopyFileOrDirectory(Application.dataPath + "/Resources/sprites/Thycon.png", DataPath + "sprites/Thycon.png");
+        if (!File.Exists(DataPath + "sprites/mstiekema.jpeg")) File.Copy(Application.dataPath + "/DefaultFiles/sprites/mstiekema.jpeg", DataPath + "sprites/mstiekema.jpeg");
+        if (!File.Exists(DataPath + "sprites/pixelsrealm.jpg")) File.Copy(Application.dataPath + "/DefaultFiles/sprites/pixelsrealm.jpg", DataPath + "sprites/pixelsrealm.jpg");
+        if (!File.Exists(DataPath + "sprites/Thycon.png")) File.Copy(Application.dataPath + "/DefaultFiles/sprites/Thycon.png", DataPath + "sprites/Thycon.png");
         // Settings
         if (File.Exists(DataPath + "settings/Settings.txt")) LoadSettings();
         else SaveSettings();
