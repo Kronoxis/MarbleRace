@@ -6,7 +6,7 @@ This the Development PROJECT Branch. Build can be found in [Development-Build Br
 # Changelog
 ## v2.1.3 _(02 Sep 2017)_
 ### FIXES
-- Data Path can now be changed without breaking the Application
+- Data Path can now be changed
 
 ## v2.1.2 _(02 Sep 2017)_
 ### NEW
