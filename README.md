@@ -4,6 +4,9 @@ Marble Race - Giveaway System
 This the Development PROJECT Branch. Build can be found in [Development-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Development-Build)
 
 # Changelog
+## v2.1.3 _(02 Sep 2017)_
+### FIXES
+- Data Path can now be changed without breaking the Application
 ## v2.1.2 _(02 Sep 2017)_
 ### NEW
 - Small Race, designed for 5-40 marbles
@@ -21,7 +24,7 @@ This the Development PROJECT Branch. Build can be found in [Development-Build Br
 - Zooming Keys
 - Minor Tweaks (Timing and bounciness)
 
-## v2.0.1 _(29 Aug 2017)_ [WIP]
+## v2.0.1 _(29 Aug 2017)_
 ### NEW
 - Launchpad
 - Divider
