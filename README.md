@@ -3,21 +3,6 @@ Marble Race - Giveaway System
 
 This the Development PROJECT Branch. Build can be found in [Development-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Development-Build)
 
-# How to Install
-- Download this branch as ZIP from GitHub. 
-- Extract anywhere you like.
-- Run _MarbleRace.exe_
-
-# How to Configure
-- In the Application, go to _Settings_.
-- URL and Data Path can be changed by typing in the white Input Field.
-- Delays, Timers and Speeds can be changed by dragging the slider or typing in the white Input Field.
-- Sprite Sources can be changed by clicking on the Dropdown box and selecting an option.
-- Keys can be changed by clicking on the white Button and pressing the desired key.
-- Changed Settings will be saved when pressing the Main Menu button.
-
-By default, the Application will create folders in your AppData folder. When changing the Data Path, these folders will be recreated (NOT moved), the old ones will thus not be removed.
-
 # Changelog
 ## v2.1.2 _(02 Sep 2017)_
 ### NEW
