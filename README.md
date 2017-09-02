@@ -7,6 +7,7 @@ This the Development PROJECT Branch. Build can be found in [Development-Build Br
 ## v2.1.3 _(02 Sep 2017)_
 ### FIXES
 - Data Path can now be changed without breaking the Application
+
 ## v2.1.2 _(02 Sep 2017)_
 ### NEW
 - Small Race, designed for 5-40 marbles
