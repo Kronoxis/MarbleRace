@@ -64,24 +64,26 @@ public class scr_SelectRaceSync : MonoBehaviour {
 
     public void LoadSelectedScene()
     {
-        //SceneManager.LoadScene(m_RaceBuildIndices[m_SelectedRace]);
+        // Set Canvas and Scripts of Selection Scene inactive
         GameObject.Find("SelectionCanvas").SetActive(false);
         GameObject.Find("SelectionScripts").SetActive(false);
+
+        // Set RaceRequirements of Race Scene active
         var raceGOs = SceneManager.GetSceneByBuildIndex(m_RaceBuildIndices[m_SelectedRace]).GetRootGameObjects();
         foreach (var go in raceGOs)
         {
             if (go.name == "RaceRequirements")
             {
                 go.SetActive(true);
-                //foreach (Transform child in go.transform)
-                //{
-                //    if (child.name == "Canvas") child.gameObject.SetActive(true);
-                //    else if (child.name == "Scripts") child.gameObject.SetActive(true);
-                //}
                 break;
             }
-
         }
+
+        // Set Camera Position and Size
+        Vector3 pos = scr_RaceInput.GetSpawn();
+        pos.z = -12;
+        Camera.main.transform.position = pos;
+        Camera.main.orthographicSize = 5.5f;
     }
 
     void LoadRaceInfo()
