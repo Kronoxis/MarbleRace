@@ -1,47 +1,70 @@
 # MarbleRace
 Marble Race - Giveaway System
 
-# v2.1.1 _(31 Aug 2017)_
-## NEW
+This the Development PROJECT Branch. Build can be found in [Development-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Development-Build)
+
+# How to Install
+- Download this branch as ZIP from GitHub. 
+- Extract anywhere you like.
+- Run _MarbleRace.exe_
+
+# How to Configure
+- In the Application, go to _Settings_.
+- URL and Data Path can be changed by typing in the white Input Field.
+- Delays, Timers and Speeds can be changed by dragging the slider or typing in the white Input Field.
+- Sprite Sources can be changed by clicking on the Dropdown box and selecting an option.
+- Keys can be changed by clicking on the white Button and pressing the desired key.
+- Changed Settings will be saved when pressing the Main Menu button.
+
+By default, the Application will create folders in your AppData folder. When changing the Data Path, these folders will be recreated (NOT moved), the old ones will thus not be removed.
+
+# Changelog
+## v2.1.2 _(02 Sep 2017)_
+### NEW
+- Small Race, designed for 5-40 marbles
+### CHANGES
+- Minor Tweaks
+
+## v2.1.1 _(31 Aug 2017)_
+### NEW
 - Race Descriptions (Loaded from DataPath/races/)
 - Fonts
-## CHANGES
+### CHANGES
 - Main Menu
 - Settings Menu
 - Race Select Menu
 - Zooming Keys
 - Minor Tweaks (Timing and bounciness)
 
-# v2.0.1 _(29 Aug 2017)_ [WIP]
-## NEW
+## v2.0.1 _(29 Aug 2017)_ [WIP]
+### NEW
 - Launchpad
 - Divider
 - Switch
 - Wind
-## CHANGES
+### CHANGES
 - Sprites are now also loaded from Twitch
 - Races are now built using modular meshes (~Lego)
 
-# v1.1.3 _(26 Aug 2017)_
-## FIXES
+## v1.1.3 _(26 Aug 2017)_
+### FIXES
 - Rotation Lock Axis
 
-# v1.1.2 _(25 Aug 2017)_
-## FIXES
+## v1.1.2 _(25 Aug 2017)_
+### FIXES
 - Missed Collision Detections
 - Rotation Lock
 
-# START OF GIT _(05 Febr 2017)_
+### START OF GIT _(05 Febr 2017)_
 
-# v1.1.1 _(04 Febr 2017)_
-## NEW
+## v1.1.1 _(04 Febr 2017)_
+### NEW
 - data Folder no longer saves in Application_Data folder. Instead, files will be saved in AppData/MarbleRace/data to keep resources through different versions
-
-## EXTRA
+### EXTRA
 - Folder "DefaultSprites". Contains 3 sprites for PixelsRealm, Thycon and Mstiekema. Copy to your Sprites folder to make them work. (Default: %AppData%/MarbleRace/data/sprites/)
 
-# v1.1.0 _(04 Febr 2017)_
-## NEW
+## v1.1.0 _(04 Febr 2017)_
+### NEW
 - Leaderboard increased in width (Names no longer get wrapped and fit in the entire Panel)
 - Names in Leaderboard have a drop shadow (Increased readability)
 - Leaderboard Save Format can now be set in Config
@@ -50,20 +73,18 @@ Marble Race - Giveaway System
     * Preferred Image Ratio: 1:1. 
     * Minimum Resolution for Optimal Quality: 128*128px. 
     * Capitals not important
-
-## FIXES
+### FIXES
 - Minor Bugs in Controls and Config save/load scripts
 
-# v1.0.5 _(28 Dec 2017)_
-## NEW
+## v1.0.5 _(28 Dec 2017)_
+### NEW
 - Leaderboard now has colored text. Colors correspond with the color of the user's marble.
 - Leaderboard automatically saves when the winner has touched the Finish.
-
-## FIXES
+### FIXES
 - Bottom Part of Race 1 was fixed (Marbles no longer get stuck)
 
-# v1.0.4 _(17 Dec 2017)_
-## NEW
+## v1.0.4 _(17 Dec 2017)_
+### NEW
 - Added Menu Screen
 - Added Race Select Screen
 - Added Race Edit Screen (Empty)
@@ -76,34 +97,31 @@ Marble Race - Giveaway System
 - Added Back button in Race to go back to Menu (will reset race)
 - Autosave of entered users
 - Ability to Save leaderboard (Save button in race)
-
-## FIXES
+### FIXES
 - Camera can't go through Race anymore
 - Start can no longer be triggered before giveaway is closed
-
-## KNOWN BUGS
+### KNOWN BUGS
 - "Add Marble Delay" slider text values do not show correctly when loading the Config screen, 
     even though the value of the slider itself is correct.
 - Bottom Lane of Bottom part has a straight bit where marbles get stuck.
 
-# v1.0.3 _(30 Oct 2017)_
-## NEW
+## v1.0.3 _(30 Oct 2017)_
+### NEW
 - Application now runs in background
 - GUI element lets user know if giveaway hasn't been closed
-
-## FIXES
+### FIXES
 - Elements that are partly inside background bumped back a pixel, so it is behind background color
 - Added wheel from v1.0.1 wasn't placed correctly. Shifted it to better location
 
-# v1.0.2 _(27 Oct 2017)_
-## NEW
+## v1.0.2 _(27 Oct 2017)_
+### NEW
 - Added 60 FPS target
 
-# v1.0.1 _(27 Oct 2017)_
-## FIXES
+## v1.0.1 _(27 Oct 2017)_
+### FIXES
 - Added wheel at the beginning, bottom lane, to prevent queue
 
-# _TO DO_
+## _TO DO_
 - Add More Races
 - Add Course editing
 - Add System for Knockout-Race
