@@ -4,6 +4,13 @@ Marble Race - Giveaway System
 This the Development PROJECT Branch. Build can be found in [Development-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Development-Build)
 
 # Changelog
+## v2.1.4 _(09 Sep 2017)_
+### CHANGES
+- New font, should be more readable
+### FIXES
+- Bug where Marbles could get stuck in Small race has been resolved
+- Non-existing Twitch user in Giveaway list doesn't break picture download process
+
 ## v2.1.3 _(02 Sep 2017)_
 ### FIXES
 - Data Path can now be changed
