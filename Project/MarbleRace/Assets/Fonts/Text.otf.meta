@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4772240a03714e2449d10a526e604b15
-timeCreated: 1504144709
+guid: 2905b8553f8bcd74da9bb902ef0a3299
+timeCreated: 1504989772
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,9 +9,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: GeosansLight
+  fontName: Biko
   fontNames:
-  - GeosansLight
+  - Biko
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

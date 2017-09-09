@@ -22,6 +22,7 @@ public class scr_Users : MonoBehaviour
     Dictionary<string, float> m_JoinedUsersTime = new Dictionary<string, float>();
     float m_LoadedMessageTime = 1.0f;
     float m_ShowNameTime = 3.0f;
+    Texture2D m_Tex = null;
 
     // Use this for initialization
 	void Start ()
@@ -124,83 +125,59 @@ public class scr_Users : MonoBehaviour
                 if (m_Userlist.Find(x => x.name == name)) continue;
 
                 // Marble Skin
-                Texture2D tex = null;
-                WWW www = null;
+                m_Tex = null;
                 switch (scr_InputManager.SpriteSource)
                 {
                     case scr_InputManager.SpriteSources.Local:
-                        {
-                            // LOCAL
-                            // Get file
-                            FileInfo file = m_SpriteFiles.Find(x => x.Name.Substring(0, x.Name.IndexOf('.')).ToLower() == name);
-                            if (file != null)
-                            {
-                                // Convert file to tex
-                                tex = new Texture2D(128, 128, TextureFormat.RGB24, false);
-                                byte[] imageData = File.ReadAllBytes(file.FullName);
-                                tex.LoadImage(imageData);
-                            }
-                        }
+                        yield return StartCoroutine(LoadLocalImage(name));
                         break;
                     case scr_InputManager.SpriteSources.Twitch:
-                        {
-                            // TWITCH
-                            // Get link
-                            www = new WWW("http://api.yucibot.nl/user/pf/" + name);
-                            while (!www.isDone) yield return 0;
-                            string link = www.text;
-                            if (link != "")
-                            {
-                                // Convert link to tex
-                                tex = new Texture2D(128, 128, TextureFormat.RGB24, false);
-                                www = new WWW(link);
-                                while (!www.isDone) yield return 0;
-                                www.LoadImageIntoTexture(tex);
-                                tex.name = name;
-                            }
-                        }
+                        yield return StartCoroutine(LoadTwitchImage(name));
                         break;
                     case scr_InputManager.SpriteSources.Both:
-                        {
-                            // LOCAL
-                            // Get file
-                            FileInfo file = m_SpriteFiles.Find(x => x.Name.Substring(0, x.Name.IndexOf('.')).ToLower() == name);
-                            if (file != null)
-                            {
-                                // Convert file to tex
-                                tex = new Texture2D(128, 128, TextureFormat.RGB24, false);
-                                byte[] imageData = File.ReadAllBytes(file.FullName);
-                                tex.LoadImage(imageData);
-                            }
-                            // TWITCH
-                            else
-                            {
-                                www = new WWW("http://api.yucibot.nl/user/pf/" + name);
-                                while (!www.isDone) yield return 0;
-                                string link = www.text;
-                                if (link != "")
-                                {
-                                    // Convert link to tex
-                                    tex = new Texture2D(128, 128, TextureFormat.RGB24, false);
-                                    www = new WWW(link);
-                                    while (!www.isDone) yield return 0;
-                                    www.LoadImageIntoTexture(tex);
-                                }
-                            }
-                        }
+                        yield return StartCoroutine(LoadLocalImage(name));
+                        if (m_Tex == null) yield return StartCoroutine(LoadTwitchImage(name));
                         break;
                     default:
                         break;
                 }
-
-                // Set Texture name
-                if (tex) tex.name = name;
-
-                CreateMarble(name, tex);
+                CreateMarble(name, m_Tex);
             }
 
             // Delay
             yield return new WaitForSeconds(0.25f);
+        }
+    }
+
+    IEnumerator LoadLocalImage(string name)
+    {
+        // Get file
+        FileInfo file = m_SpriteFiles.Find(x => x.Name.Substring(0, x.Name.IndexOf('.')).ToLower() == name);
+        if (file != null)
+        {
+            // Convert file to tex
+            m_Tex = new Texture2D(128, 128, TextureFormat.RGB24, false);
+            byte[] imageData = File.ReadAllBytes(file.FullName);
+            m_Tex.LoadImage(imageData);
+            m_Tex.name = name;
+        }
+        yield return 0;
+    }
+
+    IEnumerator LoadTwitchImage(string name)
+    {
+        // Get link
+        WWW www = new WWW("http://api.yucibot.nl/user/pf/" + name);
+        while (!www.isDone) yield return 0;
+        string link = www.text;
+        if (link != "" && link != null && link != "This user does not exist")
+        {
+            // Convert link to tex
+            m_Tex = new Texture2D(128, 128, TextureFormat.RGB24, false);
+            www = new WWW(link);
+            while (!www.isDone) yield return 0;
+            www.LoadImageIntoTexture(m_Tex);
+            m_Tex.name = name;
         }
     }
 
