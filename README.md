@@ -4,6 +4,12 @@ Marble Race - Giveaway System
 This the Development PROJECT Branch. Build can be found in [Development-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Development-Build)
 
 # Changelog
+## v2.1.5 _(13 Sep 2017)_
+### FIXES
+- Race can't be started before users have loaded
+- Userlist will update when giveaway was started after opening the race
+- Blank user no longer appears when opening the race before starting the giveaway
+
 ## v2.1.4 _(09 Sep 2017)_
 ### CHANGES
 - New font, should be more readable
