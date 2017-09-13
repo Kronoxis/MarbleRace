@@ -25,7 +25,19 @@ public class LeaderboardValue
         else
         {
             Texture2D tex = (Texture2D)mat.mainTexture;
-            Color = tex.GetPixel(tex.width / 2, tex.height / 2);
+            float r = 0, g = 0, b = 0;
+            int rows = 6, cols = 6;
+            for (int row = 0; row < rows; ++row)
+            {
+                for (int col = 0; col < cols; ++col)
+                {
+                    var c = tex.GetPixel(tex.width / 2 + col - col / 2, tex.height / 2 + row - row / 2);
+                    r += c.r;
+                    g += c.g;
+                    b += c.b;
+                }
+            }
+            Color = new Color(r / rows / cols, g / rows / cols, b / rows / cols);
         }
 
         // Checkpoint

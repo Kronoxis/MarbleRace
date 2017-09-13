@@ -67,14 +67,14 @@ public class scr_Users : MonoBehaviour
 
     void Update()
     {
-        if (m_LoadedMessageTime > -0.99f || m_LoadedMessageTime < -1.01f)
+        if (!scr_RaceInput.IsStarted)
             UpdateCenterText();
     } 
 
     IEnumerator DownloadWebpage()
     {
         // While Giveaway is not closed
-        while (!scr_RaceInput.IsClosed)
+        while (!scr_RaceInput.IsStarted)
         {
             // Download Webpage
             WWW www = new WWW(scr_InputManager.URL);
@@ -93,6 +93,7 @@ public class scr_Users : MonoBehaviour
         char[] seperators = { split };
         var users = data.Split(seperators, System.StringSplitOptions.RemoveEmptyEntries);
 
+        // Remove Close symbol from last name
         if (users.Length > 0)
         {
             var last = users[users.Length - 1];
@@ -101,10 +102,17 @@ public class scr_Users : MonoBehaviour
                 users[users.Length - 1] = last.Substring(0, last.Length - 1);
                 scr_RaceInput.IsClosed = true;
             }
+            else
+            {
+                scr_RaceInput.IsClosed = false;
+            }
         }
 
+        // Add new users to list
         foreach (var user in users)
         {
+            // Don't add empty entries
+            if (user == "") continue;
             // Don't add same user again
             if (m_Usernames.Find(x => x == user) != null) continue;
             // Add to list
@@ -116,7 +124,7 @@ public class scr_Users : MonoBehaviour
     {
         // Loop while Giveaway is open 
         // or when it's closed and not all usernames have been added yet
-        while (m_Userlist.Count != m_Usernames.Count || !scr_RaceInput.IsClosed)
+        while (m_Userlist.Count != m_Usernames.Count || !scr_RaceInput.IsStarted)
         {
             for (int i = 0; i < m_Usernames.Count; ++i)
             {
@@ -201,6 +209,9 @@ public class scr_Users : MonoBehaviour
         // Adding Users
         if (!scr_RaceInput.IsClosed || m_JoinedUsersTime.Count > 0)
         {
+            // Set Timers
+            m_LoadedMessageTime = 1.0f;
+
             for (int i = 0; i < m_JoinedUsersTime.Count; ++i)
             {
                 var key = m_JoinedUsersTime.ElementAt(i).Key;

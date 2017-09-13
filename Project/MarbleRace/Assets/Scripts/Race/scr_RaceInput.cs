@@ -11,6 +11,7 @@ public class scr_RaceInput : MonoBehaviour
         Rectangle
     }
 
+    public static bool IsStarted = false;
     public static bool IsClosed = false;
     public static bool IsDoneLoading = false;
     public static bool RandomizeSpawn = true;
@@ -27,6 +28,7 @@ public class scr_RaceInput : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // Find Objects
         var obj = GameObject.FindGameObjectWithTag("Spawn");
         if (obj)
             m_Spawn = obj.transform.position;
@@ -39,19 +41,27 @@ public class scr_RaceInput : MonoBehaviour
         else
             Debug.Log("Could not find an object tagged as 'Cap'. You will not be able to open the spawn room.");
 
-        Instructions.SetActive(true);
         m_CenterText = GameObject.FindGameObjectWithTag("CenterText").GetComponent<Text>();
+
+        // Show Instructions
+        Instructions.SetActive(true);
+
+        // Set bools
+        IsStarted = false;
+        IsClosed = false;
+        IsDoneLoading = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsDoneLoading && Input.GetKeyUp(scr_InputManager.Key_Start))
+        if (IsDoneLoading && IsClosed && !IsStarted && Input.GetKeyUp(scr_InputManager.Key_Start))
         {
+            IsStarted = true;
             StartCoroutine(ReleaseMarbles(scr_InputManager.ReleaseTimer));
         }
 
-        if (IsClosed && Instructions.activeInHierarchy)
+        if (IsStarted && Instructions.activeInHierarchy)
         {
             Instructions.SetActive(false);
         }
@@ -64,12 +74,6 @@ public class scr_RaceInput : MonoBehaviour
 
 #if UNITY_EDITOR
         // DEBUG KEYS
-        // Manual Close
-        if (Input.GetKeyUp(KeyCode.C))
-        {
-            IsClosed = true;
-        }
-
         // TimeScale
         if (Input.GetKey(KeyCode.KeypadPlus))
         {
