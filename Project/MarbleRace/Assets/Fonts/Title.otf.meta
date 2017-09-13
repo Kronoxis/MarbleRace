@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ddac3cbf8a6f40d4781ebcc345b882d9
+timeCreated: 1504144473
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Magic Marbles
+  fontNames:
+  - Magic Marbles
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

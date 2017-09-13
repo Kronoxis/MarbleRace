@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2905b8553f8bcd74da9bb902ef0a3299
+timeCreated: 1504989772
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Biko
+  fontNames:
+  - Biko
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

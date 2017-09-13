@@ -1,8 +1,0 @@
-InputPath: E:/Projects/Unity/MarbleRace/Marble Race - Giveaway System/Assets/data/input/
-GiveawayURL: http://www.pixelbot.nl/giveaway
-SpritePath: E:/Projects/Unity/MarbleRace/Marble Race - Giveaway System/Assets/data/sprites/
-SavePath: E:/Projects/Unity/MarbleRace/Marble Race - Giveaway System/Assets/data/saves/
-SaveFormat: HHMMSS_YYYYDDMM
-DownloadUsersDelay: 1
-ScoreboardUpdateDelay: 0.05
-AddMarbleDelay: 0.1
