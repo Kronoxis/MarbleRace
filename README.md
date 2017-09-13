@@ -1,7 +1,8 @@
 # MarbleRace
 Marble Race - Giveaway System
 
-This the Development PROJECT Branch. Build can be found in [Development-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Development-Build)
+This the Release PROJECT Branch. This Branch contains the Unity Project, Code and Files. 
+The Build (executable) can be found in [Release-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Release-Build)
 
 # Changelog
 ## v2.1.5 _(13 Sep 2017)_
