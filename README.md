@@ -1,8 +1,9 @@
 # MarbleRace
 Marble Race - Giveaway System
 
-This the Release PROJECT Branch. This Branch contains the Unity Project, Code and Files. 
-The Build (executable) can be found in [Release-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Release-Build)
+Marble Race is a giveaway system designed for Twitch streamers. By having marbles bounce their way through an obstacle filled level, it makes giveaways more entertaining and exciting for the viewers. 
+This application works in association with [Yucibot, a Twitch bot written and maintained by Mstiekema](https://github.com/Mstiekema/Yucibot)
+The Build (executable) can be found in [Releases](https://github.com/Kronoxis/MarbleRace/releases)
 
 # Changelog
 ## v2.1.6 _(14 Oct 2017)_
