@@ -5,6 +5,10 @@ This the Release PROJECT Branch. This Branch contains the Unity Project, Code an
 The Build (executable) can be found in [Release-Build Branch](https://github.com/Kronoxis/MarbleRace/tree/Release-Build)
 
 # Changelog
+## v2.1.6 _(14 Oct 2017)_
+### CHANGES
+- Unity version updated to 2017.1.1f1 (Includes a security update)
+
 ## v2.1.5 _(13 Sep 2017)_
 ### FIXES
 - Race can't be started before users have loaded
