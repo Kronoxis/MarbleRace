@@ -87,15 +87,15 @@ public class scr_Leaderboard : MonoBehaviour
             m_CheckpointLocations[n] = v;
         }
         // Add finish as last checkpoint that no one can trigger (prevent out of range errors)
-        m_CheckpointLocations.Add(GameObject.FindGameObjectWithTag("End").transform.position);
+        //m_CheckpointLocations.Add(GameObject.FindGameObjectWithTag("End").transform.position);
 
         // Clear texts
-        Ranking.text = null;
-        Ranking.supportRichText = true;
+        //Ranking.text = null;
+        //Ranking.supportRichText = true;
         m_RawRanking = null;
 
         // Leaderboard Update Loop
-        StartCoroutine(UpdateBoard());
+        //StartCoroutine(UpdateBoard());
     }
 
     public static void AddUserToLeaderboard(GameObject user)

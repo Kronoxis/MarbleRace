@@ -36,7 +36,7 @@ public class scr_Switch : MonoBehaviour {
         if (m_IsOpened) return;
 
         // Open when Needed Touches is reached
-        if (NeededTouches > scr_Users.GetMarbleCount() - 5) NeededTouches = scr_Users.GetMarbleCount() - 5;
+        if (NeededTouches > scr_Users.Instance().GetMarbleCount() - 5) NeededTouches = scr_Users.Instance().GetMarbleCount() - 5;
         if (NeededTouches < 1) NeededTouches = 1;
         if (m_TouchCount < NeededTouches) return;
         ToHide.SetActive(false);

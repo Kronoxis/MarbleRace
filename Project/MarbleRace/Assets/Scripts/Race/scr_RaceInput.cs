@@ -41,10 +41,10 @@ public class scr_RaceInput : MonoBehaviour
         else
             Debug.Log("Could not find an object tagged as 'Cap'. You will not be able to open the spawn room.");
 
-        m_CenterText = GameObject.FindGameObjectWithTag("CenterText").GetComponent<Text>();
+        //m_CenterText = GameObject.FindGameObjectWithTag("CenterText").GetComponent<Text>();
 
         // Show Instructions
-        Instructions.SetActive(true);
+        //Instructions.SetActive(true);
 
         // Set bools
         IsStarted = false;

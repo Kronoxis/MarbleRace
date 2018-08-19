@@ -15,9 +15,8 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
     }
 
     // Configuration
-    public static string URL = "http://giveaway.yucibot.com/pixelsrealm";
+    public static string Username = "";
     public static string DataPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "/MarbleRace/data/";
-    public static float DownloadDelay = 1.0f;
     public static float UpdateDelay = 0.1f;
     public static float ReleaseTimer = 3.0f;
     public static SpriteSources SpriteSource = SpriteSources.Both;
@@ -34,9 +33,12 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
     // Variables
     public static List<KeyCode> Keys = new List<KeyCode>();
     public static bool IsFinished = false;
+	public static bool IsJoinable = false;
+	public static string ChannelName = "";
 
-    // Version 
-    static string m_Version = "2.2";
+	// Version 
+	public static string MajorVersion = "3.0";
+	public static string MinorVersion = "0";
 
     // Application Settings
     void Awake()
@@ -87,13 +89,11 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
         StreamWriter writer = new StreamWriter(DataPath + "settings/Settings.txt");
 
         // Write Version
-        writer.WriteLine(m_Version);
+        writer.WriteLine(MajorVersion);
 
         // Write Config
-        writer.WriteLine("URL = " + URL);
+        writer.WriteLine("Username = " + Username);
         writer.WriteLine("DataPath = " + DataPath);
-        writer.WriteLine("DownloadDelay = " + DownloadDelay.ToString());
-        writer.WriteLine("UpdateDelay = " + UpdateDelay.ToString());
         writer.WriteLine("ReleaseTimer = " + ReleaseTimer.ToString());
         writer.WriteLine("SpriteSource = " + SpriteSource.ToString());
 
@@ -118,7 +118,7 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
         StreamReader reader = new StreamReader(DataPath + "settings/Settings.txt");
 
         // Read Version
-        if (reader.ReadLine() != m_Version)
+        if (reader.ReadLine() != MajorVersion)
         {
             // Version doesn't match, delete file and save default
             reader.Close();
@@ -128,10 +128,8 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
         }
 
         // Read Config
-        URL = FileStrToValueStr(reader.ReadLine());
+        Username = FileStrToValueStr(reader.ReadLine());
         DataPath = FileStrToValueStr(reader.ReadLine());
-        DownloadDelay = float.Parse(FileStrToValueStr(reader.ReadLine()));
-        UpdateDelay = float.Parse(FileStrToValueStr(reader.ReadLine()));
         ReleaseTimer = float.Parse(FileStrToValueStr(reader.ReadLine()));
         SpriteSource = (SpriteSources)(System.Enum.Parse(typeof(SpriteSources), FileStrToValueStr(reader.ReadLine())));
 

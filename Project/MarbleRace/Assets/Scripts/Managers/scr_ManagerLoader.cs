@@ -9,5 +9,6 @@ public class scr_ManagerLoader : MonoBehaviour
     {
         // Input Manager
         scr_InputManager.Instance();
-	}
+	    scr_TwitchChat.Instance();
+    }
 }
