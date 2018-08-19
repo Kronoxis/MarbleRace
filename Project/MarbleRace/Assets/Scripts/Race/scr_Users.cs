@@ -175,7 +175,7 @@ public class scr_Users : MonoBehaviour
     IEnumerator LoadTwitchImage(string name)
     {
         // Get link
-        WWW www = new WWW("http://api.yucibot.nl/user/pf/" + name);
+        WWW www = new WWW("http://api.yucibot.com/user/pf/" + name);
         while (!www.isDone) yield return 0;
         string link = www.text;
         if (link != "" && link != null && link != "This user does not exist")

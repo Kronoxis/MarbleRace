@@ -15,7 +15,7 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
     }
 
     // Configuration
-    public static string URL = "http://giveaway.yucibot.nl/pixelsrealm";
+    public static string URL = "http://giveaway.yucibot.com/pixelsrealm";
     public static string DataPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "/MarbleRace/data/";
     public static float DownloadDelay = 1.0f;
     public static float UpdateDelay = 0.1f;
@@ -36,7 +36,7 @@ public class scr_InputManager : scr_Singleton<scr_InputManager>
     public static bool IsFinished = false;
 
     // Version 
-    static string m_Version = "2.1";
+    static string m_Version = "2.2";
 
     // Application Settings
     void Awake()
