@@ -6,6 +6,12 @@ This application works in association with [Yucibot, a Twitch bot written and ma
 The Build (executable) can be found in [Releases](https://github.com/Kronoxis/MarbleRace/releases)
 
 # Changelog
+## v2.2.0 _(19 Aug 2018)_
+### CHANGES
+- Update to Unity 2018.2.4f1
+### FIXES
+- Yucibot Dependency for Twitch Profile Pictures
+
 ## v2.1.6 _(14 Oct 2017)_
 ### CHANGES
 - Unity version updated to 2017.1.1f1 (Includes a security update)
