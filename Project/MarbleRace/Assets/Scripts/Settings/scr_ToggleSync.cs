@@ -18,11 +18,9 @@ public class scr_ToggleSync : MonoBehaviour
 		m_Toggle = GetComponentInChildren<Toggle>();
 
 		// Event
-		var e = new Toggle.ToggleEvent();
-		e.AddListener(ToggleCallback);
-		m_Toggle.onValueChanged = e;
+		m_Toggle.onValueChanged.AddListener(ToggleCallback);
 
-		// Set Placeholder
+		// Set Placeholder and add Callbacks
 		switch (Setting)
 		{
 			case Settings.RememberMe:
@@ -48,6 +46,6 @@ public class scr_ToggleSync : MonoBehaviour
 
 	private void SetRememberMe(bool b)
 	{
-		scr_InputManager.Username = scr_InputManager.ChannelName;
+		scr_InputManager.Username = b ? scr_InputManager.ChannelName : "";
 	}
 }

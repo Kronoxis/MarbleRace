@@ -22,8 +22,8 @@ public class scr_TitleAnimation : MonoBehaviour
 		for (var i = 0; i < transform.childCount; ++i)
 		{
 			var rt = transform.GetChild(i).GetComponent<RectTransform>();
-			var delay = Random.Range(0.05f, 0.5f);
-			StartCoroutine(AnimateLetter(rt, origPos[i], 2.0f, delay));
+			var delay = Random.Range(0.05f, 0.2f);
+			StartCoroutine(AnimateLetter(rt, origPos[i], 1.0f, delay));
 			yield return new WaitForSeconds(delay);
 		}
 	}

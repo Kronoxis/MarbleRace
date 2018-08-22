@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: PixelsInc
+  companyName: Kronoxis
   productName: MarbleRace
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -155,7 +155,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.PixelsInc.MarbleRace
+    Standalone: com.Kronoxis.MarbleRace
   buildNumber:
     Standalone: 1
   AndroidBundleVersionCode: 1
@@ -633,7 +633,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: a4c05dca-5886-42ba-8b9d-23354cb4afbc
   projectName: MarbleRace
   organizationId: pixelsinc

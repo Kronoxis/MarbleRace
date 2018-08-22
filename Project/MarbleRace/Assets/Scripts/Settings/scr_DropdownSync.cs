@@ -12,45 +12,42 @@ public class scr_DropdownSync : MonoBehaviour
 
     public Settings Setting;
 
-    Dropdown m_Dropdown;
+	private Dropdown m_Dropdown;
 
     // Use this for initialization
-    void Start ()
+	private void Start ()
     {
         m_Dropdown = GetComponentInChildren<Dropdown>();
 
         // Event
-        var e = new Dropdown.DropdownEvent();
-        e.AddListener(DropdownCallback);
-        m_Dropdown.onValueChanged = e;
+        m_Dropdown.onValueChanged.AddListener(DropdownCallback);
 
-        // Set Placeholder
-        switch (Setting)
+		// Set Placeholder and add Callbacks
+		switch (Setting)
         {
             case Settings.SpriteSources:
-                SetPlaceholder(scr_InputManager.SpriteSource.ToString());
-                break;
-            default:
+                SetPlaceholder(scr_InputManager.SpriteSource);
+	            scr_InputManager.OnSpriteSourceChanged = SetPlaceholder;
                 break;
         }
     }
 
-    void DropdownCallback(int i)
+	private void DropdownCallback(int i)
     {
         switch (Setting)
         {
             case Settings.SpriteSources:
-                scr_InputManager.SpriteSource = (scr_InputManager.SpriteSources)(System.Enum.Parse(typeof(scr_InputManager.SpriteSources), m_Dropdown.options[i].text));
-                break;
-            default:
+                scr_InputManager.SpriteSource = (scr_InputManager.ESpriteSources)System.Enum.Parse(typeof(scr_InputManager.ESpriteSources), m_Dropdown.options[i].text);
                 break;
         }
     }
 
-    void SetPlaceholder(string s)
+	private void SetPlaceholder(scr_InputManager.ESpriteSources e)
     {
-        for (int i = 0; i < m_Dropdown.options.Count; ++i)
-            if (m_Dropdown.options[i].text == s)
-                m_Dropdown.value = i;
+        for (var i = 0; i < m_Dropdown.options.Count; ++i)
+        {
+	        if (m_Dropdown.options[i].text == e.ToString())
+		        m_Dropdown.value = i;
+        }
     }
 }

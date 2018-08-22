@@ -23,28 +23,28 @@ public class scr_SliderSync : MonoBehaviour
 		m_InputField = GetComponentInChildren<InputField>();
 
 		// Event
-		var eS = new Slider.SliderEvent();
-		eS.AddListener(SliderCallback);
-		m_Slider.onValueChanged = eS;
-		var eI = new InputField.SubmitEvent();
-		eI.AddListener(InputFieldCallback);
-		m_InputField.onEndEdit = eI;
-		m_InputField.onValidateInput += delegate(string input, int charIndex, char addedChar) { return InputFieldValidate(addedChar); };
+		m_Slider.onValueChanged.AddListener(SliderCallback);
+		m_InputField.onEndEdit.AddListener(InputFieldCallback);
+		m_InputField.onValidateInput += (input, charIndex, addedChar) => InputFieldValidate(addedChar);
 
-		// Set Placeholder
+		// Set Placeholder and add Callbacks
 		switch (Setting)
 		{
 			case Settings.UpdateDelay:
 				SetPlaceholder(scr_InputManager.UpdateDelay);
+				scr_InputManager.OnUpdateDelayChanged = SetPlaceholder;
 				break;
 			case Settings.ReleaseTimer:
 				SetPlaceholder(scr_InputManager.ReleaseTimer);
+				scr_InputManager.OnReleaseTimerChanged = SetPlaceholder;
 				break;
 			case Settings.MoveSpeed:
 				SetPlaceholder(scr_InputManager.MoveSpeed);
+				scr_InputManager.OnMoveSpeedChanged = SetPlaceholder;
 				break;
 			case Settings.ZoomSpeed:
 				SetPlaceholder(scr_InputManager.ZoomSpeed);
+				scr_InputManager.OnZoomSpeedChanged = SetPlaceholder;
 				break;
 		}
 	}

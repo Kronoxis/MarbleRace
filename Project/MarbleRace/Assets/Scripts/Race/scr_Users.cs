@@ -4,11 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using TwitchLib.Client.Models;
-using TwitchLib.Api;
-using TwitchLib.Unity;
-using TwitchLib.Secrets;
 
 [RequireComponent(typeof(scr_RaceInput))]
 [RequireComponent(typeof(scr_CreateMarble))]
@@ -45,7 +40,7 @@ public class scr_Users : scr_Singleton<scr_Users>
 		m_CreateMarbleScript = GetComponent<scr_CreateMarble>();
 
 		// Get Sprites
-		if (scr_InputManager.SpriteSource == scr_InputManager.SpriteSources.Local || scr_InputManager.SpriteSource == scr_InputManager.SpriteSources.Both)
+		if (scr_InputManager.SpriteSource == scr_InputManager.ESpriteSources.Local || scr_InputManager.SpriteSource == scr_InputManager.ESpriteSources.Both)
 		{
 			scr_InputManager.CreateFolders();
 			scr_InputManager.CreateFiles();
@@ -109,13 +104,13 @@ public class scr_Users : scr_Singleton<scr_Users>
 		m_Tex = null;
 		switch (scr_InputManager.SpriteSource)
 		{
-			case scr_InputManager.SpriteSources.Local:
+			case scr_InputManager.ESpriteSources.Local:
 				yield return StartCoroutine(LoadLocalImage(username));
 				break;
-			case scr_InputManager.SpriteSources.Twitch:
+			case scr_InputManager.ESpriteSources.Twitch:
 				yield return StartCoroutine(LoadTwitchImage(username));
 				break;
-			case scr_InputManager.SpriteSources.Both:
+			case scr_InputManager.ESpriteSources.Both:
 				yield return StartCoroutine(LoadLocalImage(username));
 				if (m_Tex == null) yield return StartCoroutine(LoadTwitchImage(username));
 				break;
@@ -172,13 +167,13 @@ public class scr_Users : scr_Singleton<scr_Users>
 				m_Tex = null;
 				switch (scr_InputManager.SpriteSource)
 				{
-					case scr_InputManager.SpriteSources.Local:
+					case scr_InputManager.ESpriteSources.Local:
 						yield return StartCoroutine(LoadLocalImage(name));
 						break;
-					case scr_InputManager.SpriteSources.Twitch:
+					case scr_InputManager.ESpriteSources.Twitch:
 						yield return StartCoroutine(LoadTwitchImage(name));
 						break;
-					case scr_InputManager.SpriteSources.Both:
+					case scr_InputManager.ESpriteSources.Both:
 						yield return StartCoroutine(LoadLocalImage(name));
 						if (m_Tex == null) yield return StartCoroutine(LoadTwitchImage(name));
 						break;
@@ -284,7 +279,7 @@ public class scr_Users : scr_Singleton<scr_Users>
 		// Clear
 		else if (m_LoadedMessageTime <= 0.0f)
 		{
-			m_CenterText.text = "<color=#101010><b>Press <i>" + scr_InputManager.KeyCodeToString(scr_InputManager.Key_Start) + "</i> to Start!</b></color>";
+			m_CenterText.text = "<color=#101010><b>Press <i>" + scr_InputManager.KeyCodeToString(scr_InputManager.KeyStart) + "</i> to Start!</b></color>";
 			m_LoadedMessageTime = -1.0f;
 			scr_RaceInput.IsDoneLoading = true;
 		}

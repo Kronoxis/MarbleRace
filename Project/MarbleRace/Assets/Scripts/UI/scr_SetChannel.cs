@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(InputField))]
-
 public class scr_SetChannel : MonoBehaviour
 {
 	private InputField m_InputField;

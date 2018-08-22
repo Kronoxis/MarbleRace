@@ -19,18 +19,18 @@ public class scr_InputFieldSync : MonoBehaviour
 		m_InputField = GetComponentInChildren<InputField>();
 
 		// Event
-		var e = new InputField.SubmitEvent();
-		e.AddListener(InputFieldCallback);
-		m_InputField.onEndEdit = e;
+		m_InputField.onEndEdit.AddListener(InputFieldCallback);
 
-		// Set Placeholder
+		// Set Placeholder and add Callbacks
 		switch (Setting)
 		{
 			case Settings.Username:
-				SetPlaceholder(scr_InputManager.ChannelName);
+				SetPlaceholder(scr_InputManager.Username);
+				scr_InputManager.OnUsernameChanged = SetPlaceholder;
 				break;
 			case Settings.DataPath:
 				SetPlaceholder(scr_InputManager.DataPath);
+				scr_InputManager.OnDataPathChanged = SetPlaceholder;
 				break;
 		}
 	}
@@ -56,7 +56,7 @@ public class scr_InputFieldSync : MonoBehaviour
 
 	private void SetUsername(string s)
 	{
-		scr_InputManager.ChannelName = s;
+		scr_InputManager.Username = s;
 		SetPlaceholder(s);
 	}
 

@@ -55,7 +55,7 @@ public class scr_RaceInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsDoneLoading && IsClosed && !IsStarted && Input.GetKeyUp(scr_InputManager.Key_Start))
+        if (IsDoneLoading && IsClosed && !IsStarted && Input.GetKeyUp(scr_InputManager.KeyStart))
         {
             IsStarted = true;
             StartCoroutine(ReleaseMarbles(scr_InputManager.ReleaseTimer));
@@ -66,7 +66,7 @@ public class scr_RaceInput : MonoBehaviour
             Instructions.SetActive(false);
         }
 
-        if (Input.GetKey(scr_InputManager.Key_AddTest))
+        if (Input.GetKey(scr_InputManager.KeyAddTest))
         {
             ++m_NumberOfTestMarbles;
             GetComponent<scr_Users>().CreateMarble("test" + m_NumberOfTestMarbles, null);

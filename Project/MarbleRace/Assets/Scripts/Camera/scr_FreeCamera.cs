@@ -17,13 +17,13 @@ public class scr_FreeCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // First frame of mouse button down: Set begin position
-        if (Input.GetKeyDown(scr_InputManager.Key_Move))
+        if (Input.GetKeyDown(scr_InputManager.KeyMove))
         {
             m_StartPosition = Input.mousePosition;
         }
 
         // Move Camera
-		if (Input.GetKey(scr_InputManager.Key_Move))
+		if (Input.GetKey(scr_InputManager.KeyMove))
         {
             var mousePos = Input.mousePosition;
             float deltaX = mousePos.x - m_StartPosition.x;
@@ -38,7 +38,7 @@ public class scr_FreeCamera : MonoBehaviour {
         }
 
         // Reset Position to Spawn with MMB
-        if (Input.GetKeyUp(scr_InputManager.Key_Recenter))
+        if (Input.GetKeyUp(scr_InputManager.KeyRecenter))
         {
             Vector3 spawn = scr_RaceInput.GetSpawn();
             spawn.z = -10;
@@ -49,11 +49,11 @@ public class scr_FreeCamera : MonoBehaviour {
         m_Cam.orthographicSize -= Input.mouseScrollDelta.y / 2.0f * scr_InputManager.ZoomSpeed * m_Cam.orthographicSize / 5.0f;
 
         // Zoom Camera with Keys
-        if (Input.GetKey(scr_InputManager.Key_ZoomIn))
+        if (Input.GetKey(scr_InputManager.KeyZoomIn))
         {
             m_Cam.orthographicSize *= 1.0f - 0.05f * scr_InputManager.ZoomSpeed;
         }
-        else if (Input.GetKey(scr_InputManager.Key_ZoomOut))
+        else if (Input.GetKey(scr_InputManager.KeyZoomOut))
         {
             m_Cam.orthographicSize *= 1.0f + 0.05f * scr_InputManager.ZoomSpeed;
         }
